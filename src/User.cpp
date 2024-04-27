@@ -9,5 +9,3 @@ User::User(std::string user_name, std::string user_email, std::string password)
 
   pwd_hash = SHA256::toString(digest);
 }
-
-std::string User::toString() { return pwd_hash; }
