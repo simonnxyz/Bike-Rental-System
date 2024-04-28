@@ -128,7 +128,7 @@ TEST(DatabaseUserTest, Extract) {
   ASSERT_TRUE(extractedUser != nullptr);
   EXPECT_EQ(extractedUser->get_name(), "John Doe");
 
-  // The user should no longer be in the database
+  // the user should no longer be in the database
   User *notFoundUser = db.find(query);
   ASSERT_TRUE(notFoundUser == nullptr);
 }
@@ -143,7 +143,6 @@ TEST(DatabaseUserTest, Remove) {
   bool removed = db.remove({{"name", "John Doe"}});
   ASSERT_TRUE(removed);
 
-  // The user should no longer be in the database
   User *notFoundUser = db.find({{"name", "John Doe"}});
   ASSERT_TRUE(notFoundUser == nullptr);
 }
@@ -186,7 +185,6 @@ TEST(DatabaseUserTest, RemoveMultipleUsers) {
     bool removed = db.remove({{"name", "User" + std::to_string(i)}});
     ASSERT_TRUE(removed);
 
-    // The user should no longer be in the database
     User *notFoundUser = db.find({{"name", "User" + std::to_string(i)}});
     ASSERT_TRUE(notFoundUser == nullptr);
   }
@@ -206,7 +204,6 @@ TEST(DatabaseUserTest, ExtractMultipleUsers) {
     ASSERT_TRUE(extractedUser != nullptr);
     EXPECT_EQ(extractedUser->get_name(), "User" + std::to_string(i));
 
-    // The user should no longer be in the database
     User *notFoundUser = db.find(query);
     ASSERT_TRUE(notFoundUser == nullptr);
   }
@@ -234,10 +231,9 @@ TEST(DatabaseUserTest, AddRemoveSaveAndCheckStream) {
   reset_file();
   Database<User> db("test_db.txt");
 
-  // Add 3 users
   populate_db_with_stream(db, 3);
 
-  // Remove 1 user
+  // Remove middle user
   std::map<std::string, std::string> query = {{"name", "User1"}};
   bool removed = db.remove(query);
   ASSERT_TRUE(removed);
