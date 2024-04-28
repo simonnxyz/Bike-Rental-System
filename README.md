@@ -1,6 +1,6 @@
 # 209.2 Rowery miejskie
 
-Symulator wypożyczalni rowerów miejskich. Aplikacja umożliwia dodawanie nowych kont użytkowników, rowerów, punktów dostępu. Użytkownicy mogą doładować stan konta, wypożyczyć lub zwrócić rower.
+Symulator wypożyczalni rowerów miejskich. Aplikacja umożliwia dodawanie nowych kont użytkowników, rowerów, punktów dostępu. Informacje o użytkownikach, rowerach, punktach dostępu oraz wypożyczeniach będą zapisywane do plików csv. Uruchomienie symulatora rozpocznie proces logowania, gdzie użytkownik może wpisać adres email lub numer telefonu oraz hasło, ewentualnie założyć nowe konto podając wszystkie potrzebne do tego dane. Użytkownicy mogą doładować stan konta, sprawdzić mapę punktów dostępu oraz aktualnie dostępne w nich rowery, wypożyczyć lub zwrócić jeden z nich, sprawdzić swoją historię wypożyczeń.
 
 # Klasy
 

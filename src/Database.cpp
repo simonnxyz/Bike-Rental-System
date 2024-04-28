@@ -1,6 +1,5 @@
 #include "../include/Database.h"
 #include <fstream>
-#include <windows.h>
 
 #pragma once
 
@@ -28,7 +27,7 @@ template <class T> T *Database<T>::find_by_id(const std::string &id) {
       return member.get();
     }
   }
-  return nullptr;
+  return nullptr;as
 };
 
 template <class T>
