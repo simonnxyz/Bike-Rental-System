@@ -3,15 +3,21 @@ project(Rowerownia)
 
 include_directories(include) # header files there
 
-add_library(user include/User.h src/User.cpp)
 add_library(sha256 include/SHA256.h src/SHA256.cpp)
 add_library(model include/Model.h src/Model.cpp)
 add_library(uuid src/Uuid.cpp)
+add_library(database include/Database.h)
+add_library(user include/User.h src/User.cpp)
+# tu po userze dorzucajcie swoje klasy
 
 target_link_libraries(model PRIVATE uuid)
 
 target_link_libraries(user PRIVATE sha256)
 target_link_libraries(user PRIVATE model)
+# trzeba dolaczyc do nich klase model
+# cos takiego target_link_libraries(bike PRIVATE model)
+
+target_link_libraries(database PRIVATE model)
 
 add_executable(
   main
@@ -25,6 +31,7 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(googletest)
 
+# jak w mainie uzywacie swoich funkcji to tez trzeba dorzucic
 target_link_libraries(main PRIVATE user sha256)
 
 enable_testing()
@@ -32,7 +39,10 @@ enable_testing()
 add_executable(
   google_testing
   tests/UtilsTest.cpp
+  tests/UserTest.cpp
+  tests/DatabaseTest.cpp
 )
+# tutaj dodawajcie pliki tekstowe
 target_link_libraries(
   google_testing
   GTest::gtest_main
@@ -40,7 +50,9 @@ target_link_libraries(
   sha256
   model
   uuid
+  database
 )
+# tu musicie dorzucić nazwy klas ktore zrobiliscie
 
 include(GoogleTest)
 gtest_discover_tests(google_testing)

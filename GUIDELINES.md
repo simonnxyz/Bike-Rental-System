@@ -47,9 +47,13 @@ Publisher: Xaver Hellauer
 VS Marketplace Link: https://marketplace.visualstudio.com/items?itemName=xaver.clang-format
 ```
 
-oraz narzędzia clang format
+oraz narzędzia clang format: https://prereleases.llvm.org/win-snapshots/clang-format-6923b0a7.exe
 
-klasy piszemy w następującym formacie
+W rozszerzeniu clang-format należy dodać ścieżkę do clang-format.exe
+
+### Układ klas
+
+Klasy piszemy w następującym formacie
 
 ```cpp
 class User : Model {
