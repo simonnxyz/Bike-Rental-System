@@ -9,12 +9,14 @@ add_library(uuid src/Uuid.cpp)
 add_library(database include/Database.h)
 add_library(user include/User.h src/User.cpp)
 add_library(UserInterface include/UserInterface.h src/UserInterface.cpp)
+add_library(bicycle include/Bicycle.h src/Bicycle.cpp)
 # tu po userze dorzucajcie swoje klasy
 
 target_link_libraries(model PRIVATE uuid)
 target_link_libraries(UserInterface PRIVATE user)
 target_link_libraries(user PRIVATE sha256)
 target_link_libraries(user PRIVATE model)
+target_link_libraries(bicycle PRIVATE model)
 # trzeba dolaczyc do nich klase model
 # cos takiego target_link_libraries(bike PRIVATE model)
 
