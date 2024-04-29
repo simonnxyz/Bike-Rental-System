@@ -43,13 +43,11 @@ std::vector<std::string> Bicycle::get_attributes() const {
 };
 
 bool Bicycle::check_query(const std::map<std::string, std::string> &query) const {
-  std::map<std::string, std::string> bike_map = {
-    {"id", get_id()},
-    {"name", get_name()},
-    {"price", std::to_string(get_price())},
-    {"station_id", get_station()},
-    {"is_available", get_availability()}
-  };
+std::map<std::string, std::string> bike_map = {
+      {"id", get_id()}, {"name", get_name()},
+      {"price", std::to_string(get_price())},
+      {"station_id", get_station()},
+      {"is_available", std::to_string(get_availability())}};
   for (auto const &pair : query) {
     auto it = bike_map.find(pair.first);
     if (it != bike_map.end() && it->second == pair.second) {
