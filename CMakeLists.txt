@@ -51,6 +51,7 @@ add_executable(
 target_link_libraries(
   google_testing
   GTest::gtest_main
+  bicycle
   user
   sha256
   model
