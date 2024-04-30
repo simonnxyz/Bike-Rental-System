@@ -1,5 +1,4 @@
 #include "../include/Bicycle.h"
-#include "../include/SHA256.h"
 #include <regex>
 
 Bicycle::Bicycle(const std::string &name, const double &price,
