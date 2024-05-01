@@ -34,3 +34,38 @@ void UserInterface::print_starting_menu(int width, std::string text_color, std::
     print_char('=', width, true, border_color, true, 10);
     std::cout << std::endl << get_color_code();
 }
+
+void UserInterface::redirect_from_starting_menu(std::string text_color, std::string border_color) const
+{
+    int choice = get_user_int_input("Wybierz opcję");
+
+
+    // Szkielet funkcji, jak już będzie wiadomo co i jak można w miejsca wyjść konsoli wrzucić odpowiednie
+    // funkcje z innych klas wraz z jakąś graficzną reprezentacją.
+    if(choice == 1)
+    {
+        // opcja 1
+        std::cout << "Wybrano opcję 1\n";
+    }
+    else if(choice == 2)
+    {
+        // opcja 2
+        std::cout << "Wybrano opcję 2\n";
+    }
+    else if(choice == 3)
+    {
+        //opcja 3
+        std::cout << "Wybrano opcję 3\n";
+    }
+    else if(choice == 4)
+    {
+        //opcja 4
+        std::cout << "Wybrano opcję 4\n";
+    }
+    else
+    {
+        std::cout << "Wybrano inną opcje\n";
+    }
+}
+
+
