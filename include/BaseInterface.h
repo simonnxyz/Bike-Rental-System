@@ -19,6 +19,7 @@ struct BaseInterface
     // Funkcje pobierające wybory użytkownika
     int get_user_int_input(std::string guide="") const;
     std::string get_user_str_input(std::string guide="") const;
+    float get_user_float_input(std::string guide="") const;
 
     // Funkcje pomocnicze
     std::string get_color_code(bool bold=false, const std::string color="reset") const;

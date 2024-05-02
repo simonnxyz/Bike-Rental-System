@@ -40,6 +40,29 @@ int BaseInterface::get_user_int_input(std::string guide) const
     return int_input;
 }
 
+float BaseInterface::get_user_float_input(std::string guide="") const
+{
+    std::string str_input;
+    float float_input;
+    bool correct_input = false;
+
+    while (!correct_input)
+    {
+        std::cout << "\n >>> " << guide << ": ";
+        std::getline(std::cin, str_input);
+        try
+        {
+            float_input = std::stof(str_input);
+            correct_input = true;
+        }
+        catch (const std::invalid_argument& exception)
+        {
+            std::cerr << "Wprowadzono niepoprawny typ argumentu (oczekiwany typ: float)\n";
+        }
+    }
+    return float_input;
+}
+
 bool BaseInterface::is_proper_word(const std::string string) const
 {
 	for (char c : string)
@@ -52,6 +75,7 @@ bool BaseInterface::is_proper_word(const std::string string) const
 	}
 	return true;
 }
+
 
 std::string BaseInterface::get_user_str_input(std::string guide) const
 {
