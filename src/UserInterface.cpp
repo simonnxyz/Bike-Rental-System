@@ -1,5 +1,16 @@
 #include "../include/UserInterface.h"
 
+void UserInterface::run()
+{
+    running = true;
+    while(running)
+    {
+        print_starting_text();
+        print_starting_menu();
+        redirect_from_starting_menu();
+    }
+}
+
 void UserInterface::print_starting_text(int width, std::string text_color, std::string border_color) const
 {
     if(width < 40 || width > 200)
@@ -19,7 +30,7 @@ void UserInterface::print_starting_menu(int width, std::string text_color, std::
     std::string option_3 = "3: >Doładuj środki<";
     std::string option_4 = "4: >Wyświetl informacje o koncie<";
     std::string option_5 = "5: >Wyświetl historię wypożyczeń<";
-    std::string option_6 = "6: >Wyloguj się";
+    std::string option_6 = "6: >Wyjdź<";
 
     std::vector<std::string> options;
     options.push_back(option_1);
@@ -36,7 +47,7 @@ void UserInterface::print_starting_menu(int width, std::string text_color, std::
     std::cout << std::endl << get_color_code();
 }
 
-void UserInterface::redirect_from_starting_menu(std::string text_color, std::string border_color) const
+void UserInterface::redirect_from_starting_menu(std::string text_color, std::string border_color)
 {
     std::cout << get_color_code(true, "cyan");
     int choice = get_user_int_input("Wybierz opcję");
@@ -65,10 +76,24 @@ void UserInterface::redirect_from_starting_menu(std::string text_color, std::str
         //opcja 4
         std::cout << "Wybrano opcję 4\n";
     }
+    else if(choice == 6)
+    {
+        exit();
+    }
     else
     {
         std::cout << "Wybrano inną opcje\n";
     }
 }
 
+void UserInterface::exit()
+{
+    print_exit();
+    running = false;
+}
+
+void UserInterface::print_exit() const
+{
+    std::cout<< std::endl << get_color_code(true, "blue") << "Do zobaczenia!\n\n" << get_color_code();
+}
 

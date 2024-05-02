@@ -3,10 +3,15 @@
 #include<map>
 #include<vector>
 
-struct BaseInterface
+class BaseInterface
 {
+    public:
+
     // Konstruktor
-    BaseInterface() {};
+    BaseInterface()
+    {};
+    virtual void run() = 0;
+    virtual void exit() = 0;
 
     // Funkcje wyświetlające interfejs
     void print_char( char printed_char, const int char_count, bool new_lines = false,

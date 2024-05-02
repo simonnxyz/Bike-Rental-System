@@ -40,7 +40,7 @@ int BaseInterface::get_user_int_input(std::string guide) const
     return int_input;
 }
 
-float BaseInterface::get_user_float_input(std::string guide="") const
+float BaseInterface::get_user_float_input(std::string guide) const
 {
     std::string str_input;
     float float_input;
