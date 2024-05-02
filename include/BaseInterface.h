@@ -3,10 +3,8 @@
 #include<map>
 #include<vector>
 
-class BaseInterface
+struct BaseInterface
 {
-    public:
-
     // Konstruktor
     BaseInterface() {};
 

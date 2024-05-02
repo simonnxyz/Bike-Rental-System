@@ -1,9 +1,7 @@
 #include"../include/BaseInterface.h"
 
-class UserInterface: public BaseInterface
+struct UserInterface: public BaseInterface
 {
-    public:
-
     // Konstruktor
     UserInterface() {};
 
