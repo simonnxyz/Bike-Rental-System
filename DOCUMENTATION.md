@@ -43,11 +43,11 @@ Klasa `Model` jest bazową klasą utrzymywaną w bazie danych, wszystkie klasy w
 
 - `protected: void set_id(const std::string &new_id)`: Ustawia ID modelu, do użycia w klasach pochodnych. Klauzula protected zapewnia że ID modelu nie jest modyfikowane po utworzeniu modelu(chyba że przez klasę dziedziczącą w funkcji load).
 
-## Struktura BaseInterface
+## Klasa BaseInterface
 
 Autor: **Michał Pędziwiatr**
 
-Zadaniem struct 'BaseInterface' jest stworzenie solidnych fundamentów pod dziedziczące po niej inne struktury tworzące interfejs. Jej funkcjonalność opiera się na formatowaniu oraz odpowiednim wyświetlaniu znaków, oraz pobierania danych od użytkownika.
+Zadaniem klasy 'BaseInterface' jest stworzenie solidnych fundamentów pod dziedziczące po niej inne klasy tworzące interfejs. Jej funkcjonalność opiera się na formatowaniu oraz odpowiednim wyświetlaniu znaków, oraz pobierania danych od użytkownika.
 
 ### Funkcje
 - `void print_char(char printed_char, const int char_count, bool new_lines = false, std::string color = "none", bool bold = false, int time=0) const` :
@@ -63,11 +63,11 @@ Zadaniem struct 'BaseInterface' jest stworzenie solidnych fundamentów pod dzied
 - `bool is_proper_word(const std::string string) const` :
     Sprawdza poprawność podanego ciągu znaków.
 
-## Struktura UserInterface
+## Klasa UserInterface
 
 Autor: **Michał Pędziwiatr**
 
-Struktura 'UserInterface' to struct dziedzicząca po 'BaseInterface', której zadaniem jest stworzenie przejrzystego i funkcjonalnego interfejsu dla użytkownika programu.
+Klasa 'UserInterface' to klasa dziedzicząca po 'BaseInterface', której zadaniem jest stworzenie przejrzystego i funkcjonalnego interfejsu dla użytkownika programu.
 
 ### Funkcje
 -  `void print_starting_text(int width=100, std::string text_color = "cyan", std::string border_color="blue") const` :
