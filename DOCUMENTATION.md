@@ -41,4 +41,4 @@ Klasa `Model` jest bazową klasą utrzymywaną w bazie danych, wszystkie klasy w
 - `virtual std::vector<std::string> get_attributes() const = 0`: Zwraca atrybuty po których można wyszukiwać.
 - `virtual bool check_query(const std::map<std::string, std::string> &query) const = 0`: Sprawdza, czy model spełnia zapytanie określone przez użytkownika. Zapytanie jest przekazywane jako std::map, gdzie kluczem jest nazwa atrybutu, a wartością - oczekiwana wartość atrybutu.
 
-- `protected: void set_id(const std::string &new_id)`: Ustawia ID modelu, do użycia w klasach pochodnych. Klauzula protected zapewnia że ID modelu nie jest modyfikowane po utworzeniu modelu(chyba że przez klasę dziedziczącą w funkcji load).
+- `protected: void set_id(const std::string &new_id)`: Ustawia ID modelu, do użycia w klasach pochodnych. Protected zapewnia że ID modelu nie jest modyfikowane po utworzeniu modelu(chyba że przez klasę dziedziczącą w funkcji load).

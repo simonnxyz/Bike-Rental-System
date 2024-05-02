@@ -27,7 +27,7 @@ template <class T> T *Database<T>::find_by_id(const std::string &id) {
       return member.get();
     }
   }
-  return nullptr;as
+  return nullptr;
 };
 
 template <class T>
