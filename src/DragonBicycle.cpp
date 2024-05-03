@@ -9,5 +9,6 @@ void DragonBicycle::breathe_fire() {
     std::cout << "🔥🔥🔥🔥🔥🔥" << std::endl;
 }
 void DragonBicycle::fly() {
-    std::cout << "lece bo chce" << std::endl;
+    std::cout << "lece bo chceeeee" << std::endl;
+    std::cout << "lece bo zyyyciee jest zleee" << std::endl;
 }
