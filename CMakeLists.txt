@@ -51,17 +51,19 @@ add_executable(
   tests/UtilsTest.cpp
   tests/UserTest.cpp
   tests/DatabaseTest.cpp
+  tests/BicycleTest.cpp
 )
 # tutaj dodawajcie pliki tekstowe
 target_link_libraries(
   google_testing
   GTest::gtest_main
-  bicycle
   user
   sha256
   model
   uuid
   database
+  bicycle
+  rentalstation
 )
 # tu musicie dorzucić nazwy klas ktore zrobiliscie
 
