@@ -8,8 +8,6 @@ public:
   // constructors
   RentalStation() = default;
   RentalStation(const std::string &name, const double &x, const double &y,
-                const int &capacity, const std::vector<Bicycle> &bicycles);
-  RentalStation(const std::string &name, const double &x, const double &y,
                 const int &capacity);
   
   // virtuals
@@ -20,18 +18,18 @@ public:
   check_query(const std::map<std::string, std::string> &query) const override;
 
   // setters
-  void setName(const std::string &name);
-  void setX(const double &x);
-  void setY(const double &y);
-  void setCapacity(const int &capacity);
-  void setBicycles(const std::vector<Bicycle> &bicycles);
+  void set_name(const std::string &name);
+  void set_x(const double &x);
+  void set_y(const double &y);
+  void set_capacity(const int &capacity);
+  void set_empty_spaces(const int &empty_spaes);
 
   // getters
-  std::string getName() const;
-  double getX() const;
-  double getY() const;
-  int getCapacity() const;
-  std::vector<Bicycle> getBicycles() const;
+  std::string get_name() const;
+  double get_x() const;
+  double get_y() const;
+  int get_capacity() const;
+  int get_empty_spaces() const;
 
   // operators
   bool operator==(const RentalStation& other) const;
@@ -42,5 +40,5 @@ private:
   std::string name;
   double x, y;
   int capacity;
-  std::vector<Bicycle> bicycles;
+  int empty_spaces;
 };
