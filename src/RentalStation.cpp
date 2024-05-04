@@ -3,27 +3,35 @@
 #include <sstream>
 
 RentalStation::RentalStation(const std::string &name, const double &x,
-                             const double &y, const int &capacity) {
+                             const double &y, const int &capacity,
+                             const int &empty_spaces) {
   if (capacity < 1) { throw std::invalid_argument("Pojemoność nie może być mniejsza od 1."); };
   this->name = name;
   this->x = x;
   this->y = y;
   this->capacity = capacity;
+  this->empty_spaces = empty_spaces;
 }
 
 // virtuals
 void RentalStation::load(const std::string &data) {
   // load rental station from line data
-  // format: id,name,x,y,capacity
+  // format: id,name,x,y,capacity,empty_spaces
   std::vector<std::string> parts;
   std::string part;
   std::istringstream ss(data);
   while (std::getline(ss, part, ',')) {
     parts.push_back(part);
   }
-  if (parts.size() != 5) {
+  if (parts.size() != 6) {
     throw std::invalid_argument("Nieprawidłowy format danych: " + data);
   }
+  set_id(parts[0]);
+  set_name(parts[1]);
+  set_x(std::stod(parts[2]));
+  set_y(std::stod(parts[3]));
+  set_capacity(std::stoi(parts[4]));
+  set_empty_spaces(std::stoi(parts[5]));
  }
 std::string RentalStation::str() {
   return get_id() + ',' + name + ',' +
@@ -32,13 +40,14 @@ std::string RentalStation::str() {
     std::to_string(capacity);
 }
 std::vector<std::string> RentalStation::get_attributes() const {
-  return {"id", "name", "x", "y", "capacity"};
+  return {"id", "name", "x", "y", "capacity", "empty spaces"};
 }
 bool RentalStation::check_query(const std::map<std::string, std::string> &query) const {
   std::map<std::string, std::string> member_map = {
     {"name", get_name()}, {"x", std::to_string(get_x())},
     {"y", std::to_string(get_y())},
-    {"capacity", std::to_string(get_capacity())}};
+    {"capacity", std::to_string(get_capacity())},
+    {"empty_spaces", std::to_string(get_empty_spaces())}};
 
   for (auto const &pair : query) {
     auto it = member_map.find(pair.first);

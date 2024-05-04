@@ -8,7 +8,7 @@ public:
   // constructors
   RentalStation() = default;
   RentalStation(const std::string &name, const double &x, const double &y,
-                const int &capacity);
+                const int &capacity, const int &empty_spaces);
   
   // virtuals
   virtual void load(const std::string &data) override;

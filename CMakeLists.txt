@@ -52,6 +52,7 @@ add_executable(
   tests/UserTest.cpp
   tests/DatabaseTest.cpp
   tests/BicycleTest.cpp
+  tests/RentalStationTest.cpp
 )
 # tutaj dodawajcie pliki tekstowe
 target_link_libraries(
