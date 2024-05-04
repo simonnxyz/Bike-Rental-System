@@ -8,6 +8,8 @@ public:
   // constructors
   User() = default;
   User(const std::string &user_name, const std::string &user_email,
+       const std::string &password, const double &balance);
+  User(const std::string &user_name, const std::string &user_email,
        const std::string &password);
 
   // virtuals
@@ -20,10 +22,12 @@ public:
   // setters
   void set_name(const std::string &name);
   void set_email(const std::string &email);
+  void set_balance(const double &new_balance);
 
   // getters
   std::string get_name() const;
   std::string get_email() const;
+  double get_balance() const;
 
   // overloaded operators
   bool operator==(const User &other);
@@ -36,4 +40,5 @@ private:
   std::string name;
   std::string email;
   std::string pwd_hash;
+  double balance;
 };

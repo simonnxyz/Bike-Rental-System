@@ -6,30 +6,33 @@
   "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8"
 
 TEST(UserTest, Constructor) {
-  User user("John Doe", "john@example.com", "password");
+  User user("John Doe", "john@example.com", "password", 10.99);
   const std::string id = user.get_id();
   EXPECT_EQ(user.get_name(), "John Doe");
   EXPECT_EQ(user.get_email(), "john@example.com");
   EXPECT_TRUE(user.compare_password("password"));
+  EXPECT_EQ(user.get_balance(), 10.99);
   // test if the password was hashed correctly
-  EXPECT_EQ(user.str(), id + ",John Doe,john@example.com," PASSWORD_HASH);
+  EXPECT_EQ(user.str(), id + ",John Doe,john@example.com," PASSWORD_HASH + ",10.99");
 }
 
 TEST(UserTest, SettersAndGetters) {
-  User user("John Doe", "john@example.com", "password");
+  User user("John Doe", "john@example.com", "password", 10.99);
   user.set_name("Jane Doe");
   user.set_email("jane@example.com");
   EXPECT_EQ(user.get_name(), "Jane Doe");
   EXPECT_EQ(user.get_email(), "jane@example.com");
+  EXPECT_EQ(user.get_balance(), 10.99);
 }
 
 TEST(UserTest, LoadAndStr) {
   User user;
-  user.load("1,John Doe,john@example.com,password123\n");
-  EXPECT_EQ(user.str(), "1,John Doe,john@example.com,password123\n");
+  user.load("1,John Doe,john@example.com,password123,10.99");
+  EXPECT_EQ(user.str(), "1,John Doe,john@example.com,password123,10.99");
   EXPECT_EQ(user.get_email(), "john@example.com");
   EXPECT_EQ(user.get_id(), "1");
   EXPECT_EQ(user.get_name(), "John Doe");
+  EXPECT_EQ(user.get_balance(), 10.99);
 }
 
 TEST(UserTest, CheckQuery) {
@@ -48,13 +51,13 @@ TEST(UserTest, ComparePassword) {
 }
 
 TEST(UserTest, EqualityOperator) {
-  User user1("John Doe", "john@example.com", "password123");
-  User user2("John Doe", "john@example.com", "password123");
+  User user1("John Doe", "john@example.com", "password123", 10.99);
+  User user2("John Doe", "john@example.com", "password123", 10.99);
   EXPECT_FALSE(user1 == user2);
   // only equal when id is equal
   const std::string id = user1.get_id();
   User user3;
-  user3.load(id + ",name,email@example.com,password");
+  user3.load(id + ",name,email@example.com,password,10.99");
   EXPECT_TRUE(user1 == user3);
 }
 
