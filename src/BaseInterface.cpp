@@ -140,3 +140,13 @@ void BaseInterface::print_char( char printed_char, const int char_count,
         std::cout << std::endl;
 
 }
+
+// void BaseInterface::set_users_data(Database<User> new_users_data)
+// {
+//     users_data = new_users_data;
+// }
+
+// void BaseInterface::set_bikes_data(Database<Bicycle> new_bikes_data)
+// {
+//     bikes_data = new_bikes_data;
+// }

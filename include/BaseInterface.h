@@ -2,6 +2,9 @@
 #include<iostream>
 #include<map>
 #include<vector>
+#include"../include/Database.h"
+#include"../include/Bicycle.h"
+#include"../include/User.h"
 
 class BaseInterface
 {
@@ -10,6 +13,7 @@ class BaseInterface
     // Konstruktor
     BaseInterface()
     {};
+
     virtual void run() = 0;
     virtual void exit() = 0;
 
@@ -29,4 +33,12 @@ class BaseInterface
     // Funkcje pomocnicze
     std::string get_color_code(bool bold=false, const std::string color="reset") const;
     bool is_proper_word(const std::string string) const;
+
+    // Settery
+    // void set_users_data(Database<User> new_users_data);
+    // void set_bikes_data(Database<Bicycle> new_bikes_data);
+
+    // private:
+    //     Database<User> users_data;
+    //     Database<Bicycle> bikes_data;
 };
