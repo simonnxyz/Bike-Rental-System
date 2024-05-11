@@ -54,35 +54,60 @@ void UserInterface::redirect_from_starting_menu(std::string text_color, std::str
     std::cout << get_color_code() << std::endl;
 
 
+
     // Szkielet funkcji, jak już będzie wiadomo co i jak można w miejsca wyjść konsoli wrzucić odpowiednie
     // funkcje z innych klas wraz z jakąś graficzną reprezentacją.
     if(choice == 1)
     {
-        // opcja 1
+        // Wybranie punktu wypożyczenia (następnie wybranie również roweru)
         std::cout << "Wybrano opcję 1\n";
+        // TODO: logika wyświetlania oraz wyboru stacji rowerowych i znajdujących się w nich rowerów
     }
     else if(choice == 2)
     {
-        // opcja 2
-        std::cout << "Wybrano opcję 2\n";
+        // Wyświetlenie salda
+        print_char('=', 100, true, "blue", true);
+        std::cout << get_color_code(true, "cyan") << "\nTwoje saldo wynosi: ";
+        // TODO: logika wyświetlania salda użytkownika
+        std::cout << std::endl << get_color_code();
     }
     else if(choice == 3)
     {
-        //opcja 3
-        std::cout << "Wybrano opcję 3\n";
+        // Doładowanie środków
+        print_char('=', 100, true, "blue", true);
+        float value = get_user_float_input("Podaj wartość doładowania");
+        std::cout << std::endl << std::endl << get_color_code(false, "cyan") <<
+        "Pomyślnie wpłacono kwotę o wartości: " << get_color_code(true, "green") <<
+        value << get_color_code(false, "cyan") << " złotych na twoje konto!\n\n" <<
+         get_color_code();
+         // TODO: logika zwiększania salda użytkownika o podaną wartość
+
     }
     else if(choice == 4)
     {
-        //opcja 4
-        std::cout << "Wybrano opcję 4\n";
+        // Wyświetlenie informacji o koncie
+        print_char('=', 100, true, "blue", true);
+        std::cout << get_color_code(true, "blue") << " == Twoje Konto ==\n\n" <<
+        get_color_code(true, "cyan") << ">> Nazwa: " << "\n>> Email: " <<
+        std::endl;
+    }
+    else if(choice == 5)
+    {
+        // Wyświetlenie historii wypożyczeń
+        print_char('=', 100, true, "blue", true);
+        std::cout << get_color_code(true, "cyan") << " == HISTORIA ==\n\n";
+        // TODO: logika wyświetlająca historię wczęśniejszych wypożyczeń
+        std::cout << get_color_code();
+
     }
     else if(choice == 6)
     {
+        // Wyjście
         exit();
     }
     else
     {
-        std::cout << "Wybrano inną opcje\n";
+        std::cout << "Wybierz jedną z dostępnych opcji (1-6)\n";
     }
 }
 
