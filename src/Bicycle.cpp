@@ -1,5 +1,7 @@
 #include "../include/Bicycle.h"
 #include <regex>
+#include <sstream>
+#include <iomanip>
 
 Bicycle::Bicycle(const std::string &name, const double &price,
                     const std::string &station_id, const bool &is_available) {
@@ -33,7 +35,9 @@ void Bicycle::load(const std::string &data) {
 };
 
 std::string Bicycle::str() {
-  return get_id() + "," + get_name() + "," + std::to_string(get_price()) +
+  std::stringstream ss;
+  ss << std::fixed << std::setprecision(2) << get_price();
+  return get_id() + "," + get_name() + "," + ss.str() +
   "," + get_station() + "," + std::to_string(get_availability());
 };
 
@@ -42,9 +46,11 @@ std::vector<std::string> Bicycle::get_attributes() const {
 };
 
 bool Bicycle::check_query(const std::map<std::string, std::string> &query) const {
+std::stringstream ss;
+ss << std::fixed << std::setprecision(2) << get_price();
 std::map<std::string, std::string> bike_map = {
       {"id", get_id()}, {"name", get_name()},
-      {"price", std::to_string(get_price())},
+      {"price", ss.str()},
       {"station_id", get_station()},
       {"is_available", std::to_string(get_availability())}};
   for (auto const &pair : query) {
@@ -95,7 +101,9 @@ bool Bicycle::operator!=(const Bicycle& other) const {
 std::ostream& operator<<(std::ostream& os, const Bicycle& bicycle) {
   os << "{ Id: " << bicycle.get_id() << '\n';
   os << "Name: " << bicycle.get_name() << '\n';
-  os << "Price: " << std::to_string(bicycle.get_price()) << '\n';
+  std::stringstream ss;
+  ss << std::fixed << std::setprecision(2) << bicycle.get_price();
+  os << "Price: " << ss.str() << '\n';
   os << "Station: " << bicycle.get_station() << '\n';
   std::string availability = "false";
   if (bicycle.get_availability()) { availability = "true";};
