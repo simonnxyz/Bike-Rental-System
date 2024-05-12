@@ -62,31 +62,22 @@ void UserInterface::redirect_from_starting_menu(std::string text_color,
     std::cout << "Wybrano opcję 1\n";
     // TODO: logika wyświetlania oraz wyboru stacji rowerowych i znajdujących
     // się w nich rowerów
-  } else if (choice == 2) {
+  }
+  else if (choice == 2)
+  {
     // Wyświetlenie salda
-    print_char('=', 100, true, "blue", true);
-    std::cout << get_color_code(true, "cyan") << "\nTwoje saldo wynosi: ";
-    // TODO: logika wyświetlania salda użytkownika
-    std::cout << std::endl << get_color_code();
+    print_char('=', 100, true, border_color, true);
+    show_balance(text_color);
+
   } else if (choice == 3) {
     // Doładowanie środków
-    print_char('=', 100, true, "blue", true);
-    float value = get_user_float_input("Podaj wartość doładowania");
-    std::cout << std::endl
-              << std::endl
-              << get_color_code(false, "cyan")
-              << "Pomyślnie wpłacono kwotę o wartości: "
-              << get_color_code(true, "green") << value
-              << get_color_code(false, "cyan") << " złotych na twoje konto!\n\n"
-              << get_color_code();
-    // TODO: logika zwiększania salda użytkownika o podaną wartość
+    print_char('=', 100, true, border_color, true);
+    add_balance(text_color);
 
   } else if (choice == 4) {
     // Wyświetlenie informacji o koncie
-    print_char('=', 100, true, "blue", true);
-    std::cout << get_color_code(true, "blue") << " == Twoje Konto ==\n\n"
-              << get_color_code(true, "cyan") << ">> Nazwa: "
-              << "\n>> Email: " << std::endl;
+    print_char('=', 100, true, border_color, true);
+    show_user_info(text_color);
   } else if (choice == 5) {
     // Wyświetlenie historii wypożyczeń
     print_char('=', 100, true, "blue", true);
@@ -111,4 +102,36 @@ void UserInterface::print_exit() const {
   std::cout << std::endl
             << get_color_code(true, "blue") << "Do zobaczenia!\n\n"
             << get_color_code();
+}
+
+void UserInterface::show_balance(std::string text_color)
+{
+    std::cout << get_color_code(true, text_color) << "\nTwoje saldo wynosi: ";
+    std::cout << get_color_code(true, "green") << get_user()->get_balance() << " zł";
+    std::cout << std::endl << get_color_code();
+}
+
+void UserInterface::add_balance(std::string text_color)
+{
+  double value = get_user_double_input("Podaj wartość doładowania");
+
+  double current_balance = get_user()->get_balance();
+  get_user()->set_balance(current_balance + value);
+
+    std::cout << std::endl
+              << std::endl
+              << get_color_code(false, text_color)
+              << "Pomyślnie wpłacono kwotę o wartości: "
+              << get_color_code(true, "green") << value
+              << get_color_code(false, text_color) << " złotych na twoje konto!\n\n"
+              << get_color_code();
+}
+
+void UserInterface::show_user_info(std::string text_color)
+{
+  std::cout << get_color_code(true, text_color) << "\n == Twoje Konto ==\n\n"
+              << get_color_code(true, text_color) << ">> Nazwa: " <<
+              get_user()->get_name() << "\n>> Email: " <<
+              get_user()->get_email() << std::endl;
+  std::cout << get_color_code();
 }
