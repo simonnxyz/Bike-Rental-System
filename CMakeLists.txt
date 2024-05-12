@@ -8,20 +8,24 @@ add_library(model include/Model.h src/Model.cpp)
 add_library(uuid src/Uuid.cpp)
 add_library(database include/Database.h)
 add_library(user include/User.h src/User.cpp)
+add_library(BaseInterface include/BaseInterface.h src/BaseInterface.cpp)
 add_library(UserInterface include/UserInterface.h src/UserInterface.cpp)
 add_library(bicycle include/Bicycle.h src/Bicycle.cpp)
+add_library(rentalstation include/RentalStation.h src/RentalStation.cpp)
 # tu po userze dorzucajcie swoje klasy
 
 target_link_libraries(model PRIVATE uuid)
-target_link_libraries(UserInterface PRIVATE user)
 target_link_libraries(user PRIVATE sha256)
 target_link_libraries(user PRIVATE model)
+target_link_libraries(BaseInterface PRIVATE user)
 target_link_libraries(bicycle PRIVATE model)
+target_link_libraries(rentalstation PRIVATE model)
 # trzeba dolaczyc do nich klase model
 # cos takiego target_link_libraries(bike PRIVATE model)
 
 target_link_libraries(database PRIVATE model)
-target_link_libraries(UserInterface PRIVATE model)
+target_link_libraries(BaseInterface PRIVATE model)
+target_link_libraries(UserInterface PRIVATE BaseInterface)
 
 add_executable(
   main
@@ -37,6 +41,7 @@ FetchContent_MakeAvailable(googletest)
 
 # jak w mainie uzywacie swoich funkcji to tez trzeba dorzucic
 target_link_libraries(main PRIVATE user sha256)
+target_link_libraries(main PRIVATE BaseInterface)
 target_link_libraries(main PRIVATE UserInterface)
 
 enable_testing()
@@ -46,17 +51,20 @@ add_executable(
   tests/UtilsTest.cpp
   tests/UserTest.cpp
   tests/DatabaseTest.cpp
+  tests/BicycleTest.cpp
+  tests/RentalStationTest.cpp
 )
 # tutaj dodawajcie pliki tekstowe
 target_link_libraries(
   google_testing
   GTest::gtest_main
-  bicycle
   user
   sha256
   model
   uuid
   database
+  bicycle
+  rentalstation
 )
 # tu musicie dorzucić nazwy klas ktore zrobiliscie
 

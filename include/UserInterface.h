@@ -1,34 +1,25 @@
-#include<string>
-#include<iostream>
-#include<windows.h>
-#include<map>
-#include<vector>
+#include"../include/BaseInterface.h"
 
-class UserInterface
+class UserInterface: public BaseInterface
 {
     public:
 
     // Konstruktor
     UserInterface()
-    {}
+    {};
+
+    // Pętla interfejsu
+    void run() override;
+    void exit() override;
 
     // Funkcje wyświetlające interfejs
     void print_starting_text(int width=100, std::string text_color = "cyan", std::string border_color="blue") const;
-
     void print_starting_menu(int width=100, std::string text_color = "cyan", std::string border_color="blue") const;
+    void print_exit() const;
 
-    void print_char( char printed_char, const int char_count, bool new_lines = false,
-     std::string color = "none", bool bold = false, int time=0) const;
+    // Funkcje przekierowywujące
+    void redirect_from_starting_menu(std::string text_color= "cyan", std::string border_color="blue");
 
-    void print_options(const std::vector<std::string> options, int width=50,
-     std::string text_color = "yellow") const;
-
-
-    // Funkcje pobierające wybory użytkownika
-    int get_user_int_input(std::string guide="") const;
-    std::string get_user_str_input(std::string guide="") const;
-
-    // Funkcje pomocnicze
-    std::string get_color_code(bool bold=false, const std::string color="reset") const;
-    bool is_proper_word(const std::string string) const;
+    private:
+    bool running;
 };

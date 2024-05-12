@@ -31,7 +31,7 @@ void populate_db_with_stream(Database<User> &db, int num_users) {
     // id,User{num},user{num}@example.com,password_hash
     ss << i << ",User" << i << ","
        << "user" << i << "@example.com,"
-       << "password\n";
+       << "password," << i << '\n';
   }
   db.load(ss);
 }
@@ -57,7 +57,7 @@ TEST(DatabaseUserTest, LoadUser) {
   reset_file();
   Database<User> db("test_db.txt");
   std::stringstream ss;
-  ss << "1,test_user,test_user@example.com," << PASSWORD_HASH << "\n";
+  ss << "1,test_user,test_user@example.com," << PASSWORD_HASH << ",10.99";
   // SHA256 hash of "password"
 
   db.load(ss);
@@ -86,7 +86,7 @@ TEST(DatabaseUserTest, SaveUser) {
   db.save(ss);
 
   std::string expected =
-      id + ",test_user,test_user@example.com," PASSWORD_HASH + "\n";
+      id + ",test_user,test_user@example.com," PASSWORD_HASH + ",0.00\n";
   ASSERT_EQ(ss.str(), expected);
 }
 
@@ -243,7 +243,7 @@ TEST(DatabaseUserTest, AddRemoveSaveAndCheckStream) {
   db.save(ss);
 
   // Check if stringstream is equal to the 2 users left
-  std::string expected_output = "0,User0,user0@example.com,password\n"
-                                "2,User2,user2@example.com,password\n";
+  std::string expected_output = "0,User0,user0@example.com,password,0.00\n"
+                                "2,User2,user2@example.com,password,2.00\n";
   ASSERT_EQ(ss.str(), expected_output);
 }
