@@ -40,11 +40,20 @@ public:
   void set_admins_data(Database<User> &new_bikes_data);
   void set_station_data(Database<RentalStation> &new_bikes_data);
 
+
+  // Gettery
+    Database<RentalStation>& get_station_data();
+    Database<Bicycle>& get_bikes_data();
+    Database<User>& get_users_data();
+    Database<User>& get_admins_data();
+
   // returns is_admin
   bool login();
 
   void set_user(User *user);
   User *get_user();
+
+
 
 private:
   Database<User> users_data;

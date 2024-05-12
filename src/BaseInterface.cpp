@@ -230,3 +230,23 @@ void BaseInterface::set_station_data(
 
 void BaseInterface::set_user(User *user) { user_ptr = user; };
 User *BaseInterface::get_user() { return user_ptr; };
+
+Database<RentalStation>& BaseInterface::get_station_data()
+{
+    return station_data;
+}
+
+Database<Bicycle>& BaseInterface::get_bikes_data()
+{
+    return bikes_data;
+}
+
+Database<User>& BaseInterface::get_users_data()
+{
+    return users_data;
+}
+
+Database<User>& BaseInterface::get_admins_data()
+{
+    return admins_data;
+}
