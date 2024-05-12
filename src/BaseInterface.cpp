@@ -13,7 +13,7 @@ void BaseInterface::print_options(const std::vector<std::string> options,
   for (const std::string option : options) {
     print_char(' ', int((width - longest_option) / 2), false);
     std::cout << get_color_code(false, text_color) << option
-              << get_color_code(false, "reset") << std::endl;
+              << get_color_code() << std::endl;
   }
 }
 
@@ -53,6 +53,26 @@ float BaseInterface::get_user_float_input(std::string guide) const {
     }
   }
   return float_input;
+}
+
+double BaseInterface::get_user_double_input(std::string guide) const {
+    std::string str_input;
+    double double_input;
+    bool correct_input = false;
+
+    while (!correct_input) {
+        std::cout << "\n >>> " << guide << ": ";
+        std::getline(std::cin, str_input);
+        try {
+            double_input = std::stod(str_input);
+            correct_input = true;
+        } catch (const std::invalid_argument &exception) {
+            std::cerr << "Wprowadzono niepoprawny typ argumentu (oczekiwany typ: double)\n";
+        } catch (const std::out_of_range &exception) {
+            std::cerr << "Wprowadzona liczba jest poza zakresem typu double\n";
+        }
+    }
+    return double_input;
 }
 
 bool BaseInterface::is_proper_word(const std::string string) const {
@@ -111,6 +131,7 @@ void BaseInterface::print_char(char printed_char, const int char_count,
   for (int i = 0; i < char_count; i++) {
     std::cout << printed_char;
   }
+  std::cout << get_color_code();
   if (new_lines)
     std::cout << std::endl;
 }
@@ -118,7 +139,7 @@ void BaseInterface::print_char(char printed_char, const int char_count,
 // returns is_admin
 bool BaseInterface::login() {
   int width = 100;
-  std::string border_color = "cyan";
+  std::string border_color = "blue";
   std::string login;
   std::string password;
   bool logged_in = false;
@@ -133,18 +154,23 @@ bool BaseInterface::login() {
 
     print_char(' ', (width - title_text.length()) / 2, false);
     std::cout << get_color_code(true, border_color) << title_text;
-    std::cout << std::endl << std::endl << get_color_code(false, "reset");
+    std::cout << std::endl << std::endl << get_color_code();
     // print login options
     std::vector<std::string> options = {"1. Login", "2. Rejestracja"};
-    print_options(options);
+    print_options(options, width, "cyan");
+    print_char('=', width, true, "blue", true);
+    std::cout << get_color_code(true, "cyan");
 
     int choice = get_user_int_input("Wybierz opcję");
+    std::cout << get_color_code();
+    print_char('=', width, true, "blue", true);
     if (choice > 2 || choice < 1) {
       std::cerr << "Niepoprawny wybór\n";
       continue;
     }
 
-    std::cout << options[choice - 1] << std::endl;
+    std::cout << get_color_code(true, "blue") << options[choice - 1] <<
+    get_color_code() << std::endl;
     std::string login = get_user_str_input("Email");
     std::string password = get_user_str_input("Password");
 
@@ -156,7 +182,7 @@ bool BaseInterface::login() {
       users_data.add(std::move(user));
       print_char(' ', (width - register_success.length()) / 2, false);
       std::cout << get_color_code(true, border_color) << register_success;
-      std::cout << std::endl << std::endl << get_color_code(false, "reset");
+      std::cout << std::endl << std::endl << get_color_code();
     } else {
       for (auto &admin : admins_data) {
         if (admin->get_email() == login && admin->compare_password(password)) {
@@ -175,11 +201,11 @@ bool BaseInterface::login() {
       if (logged_in) {
         print_char(' ', (width - login_success.length()) / 2, false);
         std::cout << get_color_code(true, border_color) << login_success;
-        std::cout << std::endl << std::endl << get_color_code(false, "reset");
+        std::cout << std::endl << std::endl << get_color_code();
       } else {
         print_char(' ', (width - login_fail.length()) / 2, false);
         std::cout << get_color_code(true, "red") << login_fail;
-        std::cout << std::endl << std::endl << get_color_code(false, "reset");
+        std::cout << std::endl << std::endl << get_color_code();
       }
     }
   }

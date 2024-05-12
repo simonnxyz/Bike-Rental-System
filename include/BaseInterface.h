@@ -20,13 +20,14 @@ public:
                   bool new_lines = false, std::string color = "none",
                   bool bold = false, int time = 0) const;
 
-  void print_options(const std::vector<std::string> options, int width = 50,
+  void print_options(const std::vector<std::string> options, int width = 100,
                      std::string text_color = "yellow") const;
 
   // Funkcje pobierające wybory użytkownika
   int get_user_int_input(std::string guide = "") const;
   std::string get_user_str_input(std::string guide = "") const;
   float get_user_float_input(std::string guide = "") const;
+  double get_user_double_input(std::string guide = "") const;
 
   // Funkcje pomocnicze
   std::string get_color_code(bool bold = false,
