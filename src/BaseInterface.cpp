@@ -160,13 +160,16 @@ bool BaseInterface::login() {
     } else {
       for (auto &admin : admins_data) {
         if (admin->get_email() == login && admin->compare_password(password)) {
+          set_user(admin.get());
           logged_in = true;
           is_admin = true;
         }
       }
       for (auto &user : users_data) {
-        if (user->get_email() == login && user->compare_password(password))
+        if (user->get_email() == login && user->compare_password(password)) {
+          set_user(user.get());
           logged_in = true;
+        }
       }
 
       if (logged_in) {
@@ -198,3 +201,6 @@ void BaseInterface::set_station_data(
     Database<RentalStation> &new_station_data) {
   station_data = std::move(new_station_data);
 }
+
+void BaseInterface::set_user(User *user) { user_ptr = user; };
+User *BaseInterface::get_user() { return user_ptr; };

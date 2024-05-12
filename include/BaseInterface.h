@@ -42,9 +42,14 @@ public:
   // returns is_admin
   bool login();
 
+  void set_user(User *user);
+  User *get_user();
+
 private:
   Database<User> users_data;
   Database<User> admins_data;
   Database<Bicycle> bikes_data;
   Database<RentalStation> station_data;
+
+  User *user_ptr;
 };

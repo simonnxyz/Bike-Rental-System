@@ -18,26 +18,27 @@ int main() {
     interface->set_admins_data(admins);
 
     bool is_admin = interface->login();
-    delete interface;
+
+    // Tak dostajesz obecnego usera
+    // interface->get_user();
+
+    if (is_admin) {
+      User *admin = interface->get_user();
+
+      // change this to AdminInterface when its ready
+      interface = new UserInterface();
+      interface->set_user(admin);
+    }
+
     // when the interface sets its user_data it is moved into it because users
     // is a vector of unique_ptr because of that we need to reload the data from
     // the file in case the user registered which changed our database
     users.load();
+    interface->set_users_data(users);
+    interface->set_bikes_data(bikes);
+    interface->set_station_data(stations);
 
-    if (is_admin) {
-      // change this to AdminInterface
-      interface = new UserInterface();
-      interface->set_users_data(users);
-      interface->set_bikes_data(bikes);
-      interface->set_admins_data(admins);
-      interface->set_station_data(stations);
-    } else {
-      interface = new UserInterface();
-      interface->set_users_data(users);
-      interface->set_bikes_data(bikes);
-      interface->set_station_data(stations);
-    }
-
+    // run the main loop on the interface
     interface->run();
   } catch (const std::exception &e) {
     std::cerr << e.what() << '\n';
