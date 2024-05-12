@@ -1,8 +1,9 @@
 #include "../include/User.h"
 #include "../include/SHA256.h"
+#include <iomanip>
 #include <regex>
 #include <sstream>
-#include <iomanip>
+
 
 User::User(const std::string &user_name, const std::string &user_email,
            const std::string &password, const double &balance) {
@@ -27,7 +28,7 @@ User::User(const std::string &user_name, const std::string &user_email,
   sha.update(password);
   std::array<uint8_t, 32> digest = sha.digest();
 
-  pwd_hash = SHA256::toString(digest);     
+  pwd_hash = SHA256::toString(digest);
 }
 
 // virtuals
@@ -63,8 +64,10 @@ std::vector<std::string> User::get_attributes() const {
 
 bool User::check_query(const std::map<std::string, std::string> &query) const {
   std::map<std::string, std::string> member_map = {
-      {"name", get_name()}, {"email", get_email()},
-      {"id", get_id()}, {"balance", std::to_string(get_balance())}};
+      {"name", get_name()},
+      {"email", get_email()},
+      {"id", get_id()},
+      {"balance", std::to_string(get_balance())}};
 
   for (auto const &pair : query) {
     auto it = member_map.find(pair.first);

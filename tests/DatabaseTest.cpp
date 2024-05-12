@@ -1,6 +1,5 @@
 #include "../include/Database.h"
 #include "../include/User.h"
-#include "../src/Database.cpp"
 #include <gtest/gtest.h>
 #include <sstream>
 

@@ -11,20 +11,31 @@ add_library(user include/User.h src/User.cpp)
 add_library(BaseInterface include/BaseInterface.h src/BaseInterface.cpp)
 add_library(UserInterface include/UserInterface.h src/UserInterface.cpp)
 add_library(bicycle include/Bicycle.h src/Bicycle.cpp)
-add_library(rentalstation include/RentalStation.h src/RentalStation.cpp)
-# tu po userze dorzucajcie swoje klasy
+add_library(rentalStation include/RentalStation.h src/RentalStation.cpp)
 
 target_link_libraries(model PRIVATE uuid)
-target_link_libraries(user PRIVATE sha256)
+
 target_link_libraries(user PRIVATE model)
-target_link_libraries(BaseInterface PRIVATE user)
+target_link_libraries(user PRIVATE sha256) 
+
 target_link_libraries(bicycle PRIVATE model)
-target_link_libraries(rentalstation PRIVATE model)
+
+target_link_libraries(rentalStation PRIVATE model)
+
 # trzeba dolaczyc do nich klase model
 # cos takiego target_link_libraries(bike PRIVATE model)
 
 target_link_libraries(database PRIVATE model)
+target_link_libraries(database PRIVATE user)
+target_link_libraries(database PRIVATE bicycle)
+target_link_libraries(database PRIVATE rentalStation)
+
+target_link_libraries(BaseInterface PRIVATE user)
+target_link_libraries(BaseInterface PRIVATE bicycle)
+target_link_libraries(BaseInterface PRIVATE rentalStation)
 target_link_libraries(BaseInterface PRIVATE model)
+target_link_libraries(BaseInterface PRIVATE database)
+
 target_link_libraries(UserInterface PRIVATE BaseInterface)
 
 add_executable(
@@ -40,7 +51,10 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(googletest)
 
 # jak w mainie uzywacie swoich funkcji to tez trzeba dorzucic
-target_link_libraries(main PRIVATE user sha256)
+target_link_libraries(main PRIVATE user)
+target_link_libraries(main PRIVATE bicycle)
+target_link_libraries(main PRIVATE rentalStation)
+target_link_libraries(main PRIVATE database)
 target_link_libraries(main PRIVATE BaseInterface)
 target_link_libraries(main PRIVATE UserInterface)
 
@@ -64,7 +78,7 @@ target_link_libraries(
   uuid
   database
   bicycle
-  rentalstation
+  rentalStation
 )
 # tu musicie dorzucić nazwy klas ktore zrobiliscie
 

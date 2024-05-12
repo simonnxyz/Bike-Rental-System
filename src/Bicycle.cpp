@@ -1,11 +1,14 @@
 #include "../include/Bicycle.h"
+#include <iomanip>
 #include <regex>
 #include <sstream>
-#include <iomanip>
+
 
 Bicycle::Bicycle(const std::string &name, const double &price,
-                    const std::string &station_id, const bool &is_available) {
-  if (price < 0) { throw std::invalid_argument("Cena nie może być ujemna.");};
+                 const std::string &station_id, const bool &is_available) {
+  if (price < 0) {
+    throw std::invalid_argument("Cena nie może być ujemna.");
+  };
   this->name = name;
   this->price = price;
   this->station_id = station_id;
@@ -37,19 +40,21 @@ void Bicycle::load(const std::string &data) {
 std::string Bicycle::str() {
   std::stringstream ss;
   ss << std::fixed << std::setprecision(2) << get_price();
-  return get_id() + "," + get_name() + "," + ss.str() +
-  "," + get_station() + "," + std::to_string(get_availability());
+  return get_id() + "," + get_name() + "," + ss.str() + "," + get_station() +
+         "," + std::to_string(get_availability());
 };
 
 std::vector<std::string> Bicycle::get_attributes() const {
   return {"id", "name", "price", "station_id", "is_available"};
 };
 
-bool Bicycle::check_query(const std::map<std::string, std::string> &query) const {
-std::stringstream ss;
-ss << std::fixed << std::setprecision(2) << get_price();
-std::map<std::string, std::string> bike_map = {
-      {"id", get_id()}, {"name", get_name()},
+bool Bicycle::check_query(
+    const std::map<std::string, std::string> &query) const {
+  std::stringstream ss;
+  ss << std::fixed << std::setprecision(2) << get_price();
+  std::map<std::string, std::string> bike_map = {
+      {"id", get_id()},
+      {"name", get_name()},
       {"price", ss.str()},
       {"station_id", get_station()},
       {"is_available", std::to_string(get_availability())}};
@@ -64,9 +69,7 @@ std::map<std::string, std::string> bike_map = {
 };
 
 // setters
-void Bicycle::set_name(const std::string &name) {
-  this->name = name;
-};
+void Bicycle::set_name(const std::string &name) { this->name = name; };
 
 void Bicycle::set_price(const double &price) {
   if (price < 0) {
@@ -90,15 +93,15 @@ std::string Bicycle::get_station() const { return station_id; };
 bool Bicycle::get_availability() const { return is_available; };
 
 // overloaded operators
-bool Bicycle::operator==(const Bicycle& other) const {
+bool Bicycle::operator==(const Bicycle &other) const {
   return (get_id() == other.get_id());
 };
 
-bool Bicycle::operator!=(const Bicycle& other) const {
+bool Bicycle::operator!=(const Bicycle &other) const {
   return !(*this == other);
 };
 
-std::ostream& operator<<(std::ostream& os, const Bicycle& bicycle) {
+std::ostream &operator<<(std::ostream &os, const Bicycle &bicycle) {
   os << "{ Id: " << bicycle.get_id() << '\n';
   os << "Name: " << bicycle.get_name() << '\n';
   std::stringstream ss;
@@ -106,7 +109,9 @@ std::ostream& operator<<(std::ostream& os, const Bicycle& bicycle) {
   os << "Price: " << ss.str() << '\n';
   os << "Station: " << bicycle.get_station() << '\n';
   std::string availability = "false";
-  if (bicycle.get_availability()) { availability = "true";};
+  if (bicycle.get_availability()) {
+    availability = "true";
+  };
   os << "Is available: " << availability << " }\n";
   return os;
 };

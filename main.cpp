@@ -1,22 +1,45 @@
+// #include "./include/AdminInterface.h"
+#include "./include/Bicycle.h"
 #include "./include/Database.h"
+#include "./include/RentalStation.h"
 #include "./include/User.h"
-#include "./src/Database.cpp"
+#include "./include/UserInterface.h"
 #include <iomanip>
 
 int main() {
+  Database<User> users("../database/users.txt");
+  Database<User> admins("../database/admins.txt");
+  Database<Bicycle> bikes("../database/bikes.txt");
+  Database<RentalStation> stations("../database/stations.txt");
   try {
-    Database<User> db("../database/test/users.txt");
+    // login
+    BaseInterface *interface = new UserInterface();
+    interface->set_users_data(users);
+    interface->set_admins_data(admins);
 
-    
-  } catch (std::invalid_argument e) {
-    std::cout << e.what() << "\n";
-  };
+    bool is_admin = interface->login();
+    delete interface;
+    // when the interface sets its user_data it is moved into it because users
+    // is a vector of unique_ptr because of that we need to reload the data from
+    // the file in case the user registered which changed our database
+    users.load();
 
-  User u1("John Kowalski", "sample123@gmail.com", "at124");
-  User u2("John Kowalski", "sample123@gmail.com", "at124");
+    if (is_admin) {
+      // change this to AdminInterface
+      interface = new UserInterface();
+      interface->set_users_data(users);
+      interface->set_bikes_data(bikes);
+      interface->set_admins_data(admins);
+      interface->set_station_data(stations);
+    } else {
+      interface = new UserInterface();
+      interface->set_users_data(users);
+      interface->set_bikes_data(bikes);
+      interface->set_station_data(stations);
+    }
 
-  std::cout << std::boolalpha;
-
-  std::cout << u1.compare_password("at124") << "\n";
-  std::cout << (u1 == u2); // comparison by id should return false
+    interface->run();
+  } catch (const std::exception &e) {
+    std::cerr << e.what() << '\n';
+  }
 }
