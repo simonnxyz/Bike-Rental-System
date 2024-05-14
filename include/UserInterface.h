@@ -17,8 +17,9 @@ public:
   void show_balance(std::string text_color="cyan");
   void add_balance(std::string text_color="cyan");
   void show_user_info(std::string text_color= "cyan");
-  void choose_station(std::string text_color="cyan", std::string border_color = "blue");
-  void choose_bike(RentalStation* selected_station, std::string text_color="cyan", std::string border_color="blue");
+  RentalStation* choose_station(std::string text_color="cyan", std::string border_color = "blue");
+  Bicycle* choose_bike(RentalStation* selected_station, std::string text_color="cyan", std::string border_color="blue");
+  void show_history(std::string text_color);
 
   void print_exit() const;
 

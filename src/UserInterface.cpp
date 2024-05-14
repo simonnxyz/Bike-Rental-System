@@ -27,11 +27,12 @@ void UserInterface::print_starting_text(int width, std::string text_color,
 void UserInterface::print_starting_menu(int width, std::string text_color,
                                         std::string border_color) const {
   std::string option_1 = "1: >Wybierz punkt wypożyczenia<";
-  std::string option_2 = "2: >Wyświetl saldo<";
-  std::string option_3 = "3: >Doładuj środki<";
-  std::string option_4 = "4: >Wyświetl informacje o koncie<";
-  std::string option_5 = "5: >Wyświetl historię wypożyczeń<";
-  std::string option_6 = "6: >Wyjdź<";
+  std::string option_2 = "2: >Zakończ wypożyczenie roweru<";
+  std::string option_3 = "3: >Wyświetl saldo<";
+  std::string option_4 = "4: >Doładuj środki<";
+  std::string option_5 = "5: >Wyświetl informacje o koncie<";
+  std::string option_6 = "6: >Wyświetl historię wypożyczeń<";
+  std::string option_7 = "7: >Wyjdź<";
 
   std::vector<std::string> options;
   options.push_back(option_1);
@@ -40,6 +41,7 @@ void UserInterface::print_starting_menu(int width, std::string text_color,
   options.push_back(option_4);
   options.push_back(option_5);
   options.push_back(option_6);
+  options.push_back(option_7);
 
   print_options(options, width, text_color);
 
@@ -54,40 +56,52 @@ void UserInterface::redirect_from_starting_menu(std::string text_color,
   int choice = get_user_int_input("Wybierz opcję");
   std::cout << get_color_code() << std::endl;
 
-  // Szkielet funkcji, jak już będzie wiadomo co i jak można w miejsca wyjść
-  // konsoli wrzucić odpowiednie funkcje z innych klas wraz z jakąś graficzną
-  // reprezentacją.
   if (choice == 1) {
     // Wybranie punktu wypożyczenia (następnie wybranie również roweru)
-    choose_station(text_color, border_color);
+    RentalStation* selected_station = choose_station(text_color, border_color);
+    if(selected_station)
+    {
+      Bicycle* selected_bike = choose_bike(selected_station, text_color);
+      get_rent_data().add(std::make_unique<Rent>("07.08.2005", get_user()->get_id(), selected_bike->get_id()));
+    }
   }
   else if (choice == 2)
+  {
+    // Oddanie roweru na wybranej stacji
+    RentalStation* selected_station = choose_station(text_color, border_color);
+    if(selected_station)
+    {
+      Bicycle* selected_bike = choose_bike(selected_station, text_color);
+      // TODO: logika oddająca rower
+    }
+  }
+  else if (choice == 3)
   {
     // Wyświetlenie salda
     print_char('=', 100, true, border_color, true);
     show_balance(text_color);
 
-  } else if (choice == 3) {
+  } else if (choice == 4) {
     // Doładowanie środków
     print_char('=', 100, true, border_color, true);
     add_balance(text_color);
 
-  } else if (choice == 4) {
+  } else if (choice == 5) {
     // Wyświetlenie informacji o koncie
     print_char('=', 100, true, border_color, true);
     show_user_info(text_color);
-  } else if (choice == 5) {
+  } else if (choice == 6) {
     // Wyświetlenie historii wypożyczeń
     print_char('=', 100, true, border_color, true);
     std::cout << get_color_code(true, "cyan") << " == HISTORIA ==\n\n";
     // TODO: logika wyświetlająca historię wczęśniejszych wypożyczeń
     std::cout << get_color_code();
 
-  } else if (choice == 6) {
+  } else if (choice == 7) {
     // Wyjście
     exit();
   } else {
-    std::cout << "Wybierz jedną z dostępnych opcji (1-6)\n";
+    std::cout << "Wybierz jedną z dostępnych opcji (1-7)\n";
   }
 }
 
@@ -134,7 +148,7 @@ void UserInterface::show_user_info(std::string text_color)
   std::cout << get_color_code();
 }
 
-void UserInterface::choose_station(std::string text_color, std::string border_color)
+RentalStation* UserInterface::choose_station(std::string text_color, std::string border_color)
 {
   Database<RentalStation>& stations = get_station_data();
   print_char('=', 100, true, border_color, true);
@@ -170,7 +184,7 @@ void UserInterface::choose_station(std::string text_color, std::string border_co
   {
     RentalStation* selected_station = stations[choice-1];
     print_char('=', 100, true, border_color, true);
-    choose_bike(selected_station, text_color);
+    return selected_station;
   }
   }
   else
@@ -178,9 +192,10 @@ void UserInterface::choose_station(std::string text_color, std::string border_co
     std::cout << std::endl << get_color_code(true, "red") << "Brak dostępnych punktów wypożyczenia! :(\n";
   }
   std::cout << get_color_code() << std::endl;
+  return nullptr;
 }
 
-void UserInterface::choose_bike(RentalStation* selected_station, std::string text_color, std::string border_color)
+Bicycle* UserInterface::choose_bike(RentalStation* selected_station, std::string text_color, std::string border_color)
 {
   std::string station_id = selected_station->get_id();
   Database<Bicycle>& bikes = get_bikes_data();
@@ -202,6 +217,7 @@ void UserInterface::choose_bike(RentalStation* selected_station, std::string tex
   if((choice>counter) || choice <= 0 )
   {
     std::cout << std::endl << get_color_code(true, "red") << "Nie ma takiego roweru! :(\n";
+    return nullptr;
   }
   else
   {
@@ -210,5 +226,26 @@ void UserInterface::choose_bike(RentalStation* selected_station, std::string tex
     // TODO: logika wypożyczenia roweru
     std::cout << get_color_code(true, "green") << "\nWYPOŻYCZONO ROWER: " <<
     selected_bike->get_name() << "! :)" << get_color_code();
+    return selected_bike;
   }
+}
+
+void UserInterface::show_history(std::string text_color)
+{
+  std::cout<< get_color_code(false, text_color) << std::endl;
+  int counter = 0;
+  for (auto& rental : get_rent_data())
+    {
+      if(rental->get_user() == get_user()->get_id())
+      {
+        counter ++;
+        std::cout << "> " << counter << ": " << rental->get_date() <<
+         " wypożyczono rower: " << rental->get_bicycle() << std::endl;
+      }
+    }
+  if(counter < 1)
+  {
+    std::cout << std::endl << get_color_code(true, "red") << "Jeszcze nie wypożyczono żadnego roweru\n";
+  }
+  std::cout << std::endl;
 }
