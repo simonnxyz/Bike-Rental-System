@@ -126,16 +126,21 @@ void UserInterface::show_balance(std::string text_color) {
 }
 
 void UserInterface::add_balance(std::string text_color) {
+  std::cout<< get_color_code(true, text_color);
   double value = get_user_double_input("Podaj wartość doładowania");
+  std::stringstream round_stream;
+  round_stream << std::fixed << std::setprecision(2) << value;
+  double rounded_value;
+  round_stream >> rounded_value;
 
   double current_balance = get_user()->get_balance();
-  get_user()->set_balance(current_balance + value);
+  get_user()->set_balance(current_balance + rounded_value);
 
   std::cout << std::endl
             << std::endl
             << get_color_code(false, text_color)
             << "Pomyślnie wpłacono kwotę o wartości: "
-            << get_color_code(true, "green") << value
+            << get_color_code(true, "green") << rounded_value
             << get_color_code(false, text_color)
             << " złotych na twoje konto!\n\n"
             << get_color_code();

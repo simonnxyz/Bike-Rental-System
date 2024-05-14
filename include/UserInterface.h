@@ -1,4 +1,6 @@
 #include "../include/BaseInterface.h"
+#include<sstream>
+#include<iomanip>
 
 class UserInterface : public BaseInterface {
 public:
