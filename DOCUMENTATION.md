@@ -1,3 +1,7 @@
+# Symulator wypożyczalni rowerów miejskich.
+
+Aplikacja umożliwia dodawanie nowych kont użytkowników, rowerów, punktów dostępu. Informacje o użytkownikach, rowerach, punktach dostępu oraz wypożyczeniach są zapisywane do plików txt. Uruchomienie symulatora rozpocznie proces logowania, gdzie użytkownik może wpisać adres email lub numer telefonu oraz hasło, ewentualnie założyć nowe konto podając wszystkie potrzebne do tego dane. Użytkownicy mogą sprawdzić lub doładować stan konta, wyświetlić informacje o swoim koncie, historii wypożyczeń, otrzymać listę stacji wypożyczeń oraz aktualnie dostępne w nich rowery, wypożyczyć lub zwrócić jeden z nich. Administratorzy mają pełny dostęp do aplikacji. Oznacza to, że mogą dodawać/usuwać punkty wypożyczeń, rowery, czy konta użytkowników.
+
 ## Klasa Database
 
 Autor: **Michał Mizia**
@@ -77,4 +81,34 @@ Klasa 'UserInterface' to klasa dziedzicząca po 'BaseInterface', której zadanie
 - `void redirect_from_starting_menu(std::string text_color= "cyan", std::string border_color="blue") const` :
     Pobiera oraz interpretuje wybór użytkownika, odpowiednio przekierowywując go do dalszych funkcji.
 
+## Klasa Bicycle
 
+Autor: **Kacper Siemionek**
+
+Klasa 'Bicycle' dziedziczy po klasie 'Model' oraz reprezentuje rower w wypożyczalni. Zawiera nazwę, cenę związaną z wypożyczeniem roweru, ID stacji, w której obecnie się znajduje oraz znacznik dostępności. Umożliwia swobodną kontrolę nad obiektem roweru, zapis i odczyt z std::string.
+
+## Funkcje
+
+- `Bicycle(const std::string &name, const double &price, const std::string &station_id, const bool &is_available)` : Konstruktor tworzący nowy obiekt roweru z podanymi atrybutami.
+- `void load(const std::string &data)` : Wczytuje dane o rowerze z std::string.
+- `std::string str()` : Zwraca std::string z atrybutami roweru oddzielonymi przecinkami.
+- `std::vector<std::string> get_attributes() const` : Zwraca atrybuty, po których można wyszukiwać.
+- `bool check_query(const std::map<std::string, std::string> &query) const` : Sprawdza, czy rower spełnia zapytanie określone przez użytkownika.
+- `void set_xxx(const std::string &xxx)` : Ustawia wybrany atrybut.
+- `??? get_xxx() const` : Zwraca wybrany atrybut.
+
+## Klasa RentalStation
+
+Autor: **Kacper Siemionek**
+
+Klasa 'RentalStation' dziedziczy po klasie 'Model' oraz reprezentuje stację wypożyczeń rowerów. Zawiera nazwę, współrzędne, pojemność oraz ilość wolnych miejsc na rowery. Umożliwia swobodną kontrolę nad obiektem stacji, zapis i odczyt z std::string.
+
+## Funkcje
+
+- `RentalStation(const std::string &name, const double &x, const double &y, const int &capacity, const int &empty_spaces)` : Konstruktor tworzący nowy obiekt stacji z podanymi atrybutami.
+- `void load(const std::string &data)` : Wczytuje dane o stacji z std::string.
+- `std::string str()` : Zwraca std::string z atrybutami stacji oddzielonymi przecinkami.
+- `std::vector<std::string> get_attributes() const` : Zwraca atrybuty, po których można wyszukiwać.
+- `bool check_query(const std::map<std::string, std::string> &query)` : Sprawdza, czy stacja spełnia zapytanie określone przez użytkownika.
+- `void set_xyz(const xyz &xyz)` : Ustawia wybrany atrybut. 
+- `xyz get_xyz() const` : Zwraca wybrany atrybut.

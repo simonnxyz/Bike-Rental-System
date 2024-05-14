@@ -1,66 +1,84 @@
-# 209.2 Rowery miejskie
+# Instrukcje utrzymywania, budowania i dodawania do programu
 
-Symulator wypożyczalni rowerów miejskich. Aplikacja umożliwia dodawanie nowych kont użytkowników, rowerów, punktów dostępu. Informacje o użytkownikach, rowerach, punktach dostępu oraz wypożyczeniach będą zapisywane do plików csv. Uruchomienie symulatora rozpocznie proces logowania, gdzie użytkownik może wpisać adres email lub numer telefonu oraz hasło, ewentualnie założyć nowe konto podając wszystkie potrzebne do tego dane. Użytkownicy mogą doładować stan konta, sprawdzić mapę punktów dostępu oraz aktualnie dostępne w nich rowery, wypożyczyć lub zwrócić jeden z nich, sprawdzić swoją historię wypożyczeń.
+## Odpalanie programu
 
-# Klasy
+Korzystając z CMake należy stworzyć folder build i przejść do niego za pomocą
 
-### 1. Aplikacja
+```
+mkdir build
+cd build
+```
 
-#### Atrybuty
+następnie należy użyc cmake z opcją dla odpowiedniego kompilatora np.
 
-- kolekcja użytkowników
-- kolekcja rowerów
-- kolekcja punktów dostępu
-- kolekcja wypożyczeń
+```bash
+# windows
+cmake .. -G "MinGW Makefiles"
+# linux
+cmake ..
+```
 
-#### Metody
+i zbudować projekt
 
-- dodawanie/usuwanie użytkowników
-- dodawanie/usuwanie rowerów
-- dodawanie/usuwanie punktów dostępu
-- dodawanie wypożyczeń
+```bash
+# windows
+mingw32-make
+# linux
+make
+```
 
-### 2. Rower (struct?)
+```bash
+# włączenie pliku main
+./main
+# włączenie testów
+./google_testing
+```
 
-#### Atrybuty
+## Instrukcje formatowania
 
-- cena
-- historia wypożyczeń
-- obecny punkt
-- obecny właściciel
+W środowisku visual studio code do formatowania używamy rozszerzenia:
 
-### 3. Wypożyczenie (struct?)
+```bash
+Name: Clang-Format
+Id: xaver.clang-format
+Description: Use Clang-Format in Visual Studio Code
+Version: 1.9.0
+Publisher: Xaver Hellauer
+VS Marketplace Link: https://marketplace.visualstudio.com/items?itemName=xaver.clang-format
+```
 
-#### Atrybuty
+oraz narzędzia clang format: https://prereleases.llvm.org/win-snapshots/clang-format-6923b0a7.exe
 
-- data wypożyczenia
-- ID wypożyczenia
-- użytkownik, który wypożyczył
-- rower, który był wypożyczony
+W rozszerzeniu clang-format należy dodać ścieżkę do clang-format.exe
 
-### 4. Punkt dostępu (struct?)
+### Układ klas
 
-#### Atrybuty
+Klasy piszemy w następującym formacie
 
-- współrzędne
-- dostępne rowery
-- ilość miejsc
+```cpp
+class User : Model {
+public:
+  // constructors
+  User(const std::string user_name, const std::string user_email,
+       const std::string password);
 
-### 5. Konto użytkownika (w razie potrzeby zostanie dodane konto administratora)
+  // setters
+  void set_name(const std::string &name);
+  void set_email(const std::string &email);
 
-#### Atrybuty
+  // getters
+  std::string get_name() const;
+  std::string get_email() const;
 
-- imię
-- nazwisko
-- email
-- hasło
-- numer telefonu
-- stan konta
-- historia wypożyczeń
+  // overloaded operators
+  bool operator=(const User &other);
 
-#### Metody
+  // other
+  bool compare_password(std::string password);
 
-- doładowanie konta
-- wypożyczenie roweru
-- zwrócenie roweru
-
+private:
+  std::string name;
+  std::string email;
+  std::string pwd_hash;
+};
+```
