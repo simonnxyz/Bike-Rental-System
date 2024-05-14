@@ -7,7 +7,7 @@ public:
   // constructors
   Bicycle() = default;
   Bicycle(const std::string &name, const double &price,
-       const std::string &station_id, const bool &is_available);
+          const std::string &station_id, const bool &is_available);
 
   // virtuals
   virtual void load(const std::string &data) override;
@@ -30,10 +30,10 @@ public:
 
   // overloaded operators
   bool operator==(const Bicycle &other) const;
-  bool operator!=(const Bicycle& other) const;
+  bool operator!=(const Bicycle &other) const;
   friend std::ostream &operator<<(std::ostream &os, const Bicycle &bicycle);
 
-  //other
+  // other
 private:
   std::string name;
   double price;

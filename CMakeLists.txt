@@ -6,6 +6,7 @@ include_directories(include) # header files there
 add_library(sha256 include/SHA256.h src/SHA256.cpp)
 add_library(model include/Model.h src/Model.cpp)
 add_library(uuid src/Uuid.cpp)
+add_library(date include/Date.h src/Date.cpp)
 add_library(database include/Database.h)
 add_library(user include/User.h src/User.cpp)
 add_library(BaseInterface include/BaseInterface.h src/BaseInterface.cpp)
@@ -50,6 +51,11 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(googletest)
 
+add_executable(
+  setup_data
+  setup_data.cpp
+)
+
 # jak w mainie uzywacie swoich funkcji to tez trzeba dorzucic
 target_link_libraries(main PRIVATE user)
 target_link_libraries(main PRIVATE bicycle)
@@ -57,6 +63,12 @@ target_link_libraries(main PRIVATE rentalStation)
 target_link_libraries(main PRIVATE database)
 target_link_libraries(main PRIVATE BaseInterface)
 target_link_libraries(main PRIVATE UserInterface)
+
+target_link_libraries(setup_data PRIVATE user)
+target_link_libraries(setup_data PRIVATE bicycle)
+target_link_libraries(setup_data PRIVATE rentalStation)
+target_link_libraries(setup_data PRIVATE database)
+target_link_libraries(setup_data PRIVATE date)
 
 enable_testing()
 

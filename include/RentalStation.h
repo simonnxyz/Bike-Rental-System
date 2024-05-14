@@ -1,6 +1,7 @@
-#include <Model.h>
 #include <Bicycle.h>
+#include <Model.h>
 #include <vector>
+
 #pragma once
 
 class RentalStation : public Model {
@@ -9,7 +10,7 @@ public:
   RentalStation() = default;
   RentalStation(const std::string &name, const double &x, const double &y,
                 const int &capacity, const int &empty_spaces);
-  
+
   // virtuals
   virtual void load(const std::string &data) override;
   virtual std::string str() override;
@@ -32,9 +33,10 @@ public:
   int get_empty_spaces() const;
 
   // operators
-  bool operator==(const RentalStation& other) const;
-  bool operator!=(const RentalStation& other) const;
-  friend std::ostream& operator<<(std::ostream& os, const RentalStation& rentalStation);
+  bool operator==(const RentalStation &other) const;
+  bool operator!=(const RentalStation &other) const;
+  friend std::ostream &operator<<(std::ostream &os,
+                                  const RentalStation &rentalStation);
 
 private:
   std::string name;
