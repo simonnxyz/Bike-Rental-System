@@ -2,6 +2,7 @@
 #include "../include/Database.h"
 #include "../include/RentalStation.h"
 #include "../include/User.h"
+#include "../include/Rent.h"
 #include <iostream>
 #include <map>
 #include <string>
@@ -39,6 +40,7 @@ public:
   void set_bikes_data(Database<Bicycle> &new_bikes_data);
   void set_admins_data(Database<User> &new_bikes_data);
   void set_station_data(Database<RentalStation> &new_bikes_data);
+  void set_rentals_data(Database<Rent> &new_rentals);
 
 
   // Gettery
@@ -46,6 +48,7 @@ public:
     Database<Bicycle>& get_bikes_data();
     Database<User>& get_users_data();
     Database<User>& get_admins_data();
+    Database<Rent>& get_rent_data();
 
   // returns is_admin
   bool login();
@@ -60,6 +63,7 @@ private:
   Database<User> admins_data;
   Database<Bicycle> bikes_data;
   Database<RentalStation> station_data;
+  Database<Rent> rent_data;
 
   User *user_ptr;
 };
