@@ -16,7 +16,7 @@ void UserInterface::print_starting_text(int width, std::string text_color,
   if (width < 40 || width > 200)
     width = 100;
   print_char('=', width, true, border_color, true, 10);
-  std::string title_text = "=== WITAMY W ROWEROWNI ===";
+  std::string title_text = "=== WITAMY W ROWEROWNI ===\n\n";
   std::cout << std::endl;
   print_char(' ', (width - title_text.length()) / 2, false);
   std::cout << get_color_code(true, text_color) << title_text
@@ -102,7 +102,13 @@ void UserInterface::redirect_from_starting_menu(std::string text_color,
   } else if (choice == 7) {
     // Wyjście
     exit();
-  } else {
+  }
+  else if (choice==966 || choice == 1385 || choice==1410 || choice==1610 || choice == 1918 || choice == 1989)
+  {
+    std::cout << get_color_code(true, "white") << "Chwała " << get_color_code(true, "red") << "Wielkiej " <<
+    get_color_code(true, "white") << "Polsce " << get_color_code(true, "red") << "!!!\n";
+  }
+  else {
     std::cout << "Wybierz jedną z dostępnych opcji (1-7)\n";
   }
 }
