@@ -1,6 +1,7 @@
 // #include "./include/AdminInterface.h"
 #include "./include/Bicycle.h"
 #include "./include/Database.h"
+#include "./include/Rent.h"
 #include "./include/RentalStation.h"
 #include "./include/User.h"
 #include "./include/UserInterface.h"

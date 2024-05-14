@@ -12,8 +12,8 @@ void BaseInterface::print_options(const std::vector<std::string> options,
 
   for (const std::string option : options) {
     print_char(' ', int((width - longest_option) / 2), false);
-    std::cout << get_color_code(false, text_color) << option
-              << get_color_code() << std::endl;
+    std::cout << get_color_code(false, text_color) << option << get_color_code()
+              << std::endl;
   }
 }
 
@@ -56,23 +56,24 @@ float BaseInterface::get_user_float_input(std::string guide) const {
 }
 
 double BaseInterface::get_user_double_input(std::string guide) const {
-    std::string str_input;
-    double double_input;
-    bool correct_input = false;
+  std::string str_input;
+  double double_input;
+  bool correct_input = false;
 
-    while (!correct_input) {
-        std::cout << "\n >>> " << guide << ": ";
-        std::getline(std::cin, str_input);
-        try {
-            double_input = std::stod(str_input);
-            correct_input = true;
-        } catch (const std::invalid_argument &exception) {
-            std::cerr << "Wprowadzono niepoprawny typ argumentu (oczekiwany typ: double)\n";
-        } catch (const std::out_of_range &exception) {
-            std::cerr << "Wprowadzona liczba jest poza zakresem typu double\n";
-        }
+  while (!correct_input) {
+    std::cout << "\n >>> " << guide << ": ";
+    std::getline(std::cin, str_input);
+    try {
+      double_input = std::stod(str_input);
+      correct_input = true;
+    } catch (const std::invalid_argument &exception) {
+      std::cerr
+          << "Wprowadzono niepoprawny typ argumentu (oczekiwany typ: double)\n";
+    } catch (const std::out_of_range &exception) {
+      std::cerr << "Wprowadzona liczba jest poza zakresem typu double\n";
     }
-    return double_input;
+  }
+  return double_input;
 }
 
 bool BaseInterface::is_proper_word(const std::string string) const {
@@ -169,8 +170,8 @@ bool BaseInterface::login() {
       continue;
     }
 
-    std::cout << get_color_code(true, "blue") << options[choice - 1] <<
-    get_color_code() << std::endl;
+    std::cout << get_color_code(true, "blue") << options[choice - 1]
+              << get_color_code() << std::endl;
     std::string login = get_user_str_input("Email");
     std::string password = get_user_str_input("Password");
 
@@ -228,37 +229,9 @@ void BaseInterface::set_station_data(
   station_data = std::move(new_station_data);
 }
 
-void BaseInterface::set_rentals_data(
-  Database<Rent> &new_rentals_data)
-  {
-    rent_data = std::move(new_rentals_data);
-  }
-
+void BaseInterface::set_rentals_data(Database<Rent> &new_rentals_data) {
+  rent_data = std::move(new_rentals_data);
+}
 
 void BaseInterface::set_user(User *user) { user_ptr = user; };
 User *BaseInterface::get_user() { return user_ptr; };
-
-Database<RentalStation>& BaseInterface::get_station_data()
-{
-    return station_data;
-}
-
-Database<Bicycle>& BaseInterface::get_bikes_data()
-{
-    return bikes_data;
-}
-
-Database<User>& BaseInterface::get_users_data()
-{
-    return users_data;
-}
-
-Database<User>& BaseInterface::get_admins_data()
-{
-    return admins_data;
-}
-
-Database<Rent>& BaseInterface::get_rent_data()
-{
-  return rent_data;
-}

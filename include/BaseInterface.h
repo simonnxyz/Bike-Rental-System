@@ -1,8 +1,8 @@
 #include "../include/Bicycle.h"
 #include "../include/Database.h"
+#include "../include/Rent.h"
 #include "../include/RentalStation.h"
 #include "../include/User.h"
-#include "../include/Rent.h"
 #include <iostream>
 #include <map>
 #include <string>
@@ -42,23 +42,13 @@ public:
   void set_station_data(Database<RentalStation> &new_bikes_data);
   void set_rentals_data(Database<Rent> &new_rentals);
 
-
-  // Gettery
-    Database<RentalStation>& get_station_data();
-    Database<Bicycle>& get_bikes_data();
-    Database<User>& get_users_data();
-    Database<User>& get_admins_data();
-    Database<Rent>& get_rent_data();
-
   // returns is_admin
   bool login();
 
   void set_user(User *user);
   User *get_user();
 
-
-
-private:
+public:
   Database<User> users_data;
   Database<User> admins_data;
   Database<Bicycle> bikes_data;

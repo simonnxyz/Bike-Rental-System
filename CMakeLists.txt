@@ -13,6 +13,7 @@ add_library(BaseInterface include/BaseInterface.h src/BaseInterface.cpp)
 add_library(UserInterface include/UserInterface.h src/UserInterface.cpp)
 add_library(bicycle include/Bicycle.h src/Bicycle.cpp)
 add_library(rentalStation include/RentalStation.h src/RentalStation.cpp)
+add_library(rent include/Rent.h src/Rent.cpp)
 
 target_link_libraries(model PRIVATE uuid)
 
@@ -23,6 +24,8 @@ target_link_libraries(bicycle PRIVATE model)
 
 target_link_libraries(rentalStation PRIVATE model)
 
+target_link_libraries(rent PRIVATE model)
+
 # trzeba dolaczyc do nich klase model
 # cos takiego target_link_libraries(bike PRIVATE model)
 
@@ -30,10 +33,12 @@ target_link_libraries(database PRIVATE model)
 target_link_libraries(database PRIVATE user)
 target_link_libraries(database PRIVATE bicycle)
 target_link_libraries(database PRIVATE rentalStation)
+target_link_libraries(database PRIVATE rent)
 
 target_link_libraries(BaseInterface PRIVATE user)
 target_link_libraries(BaseInterface PRIVATE bicycle)
 target_link_libraries(BaseInterface PRIVATE rentalStation)
+target_link_libraries(BaseInterface PRIVATE rent)
 target_link_libraries(BaseInterface PRIVATE model)
 target_link_libraries(BaseInterface PRIVATE database)
 
@@ -60,6 +65,7 @@ add_executable(
 target_link_libraries(main PRIVATE user)
 target_link_libraries(main PRIVATE bicycle)
 target_link_libraries(main PRIVATE rentalStation)
+target_link_libraries(main PRIVATE rent)
 target_link_libraries(main PRIVATE database)
 target_link_libraries(main PRIVATE BaseInterface)
 target_link_libraries(main PRIVATE UserInterface)

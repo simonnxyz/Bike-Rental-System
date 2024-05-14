@@ -60,9 +60,7 @@ void UserInterface::redirect_from_starting_menu(std::string text_color,
   if (choice == 1) {
     // Wybranie punktu wypożyczenia (następnie wybranie również roweru)
     choose_station(text_color, border_color);
-  }
-  else if (choice == 2)
-  {
+  } else if (choice == 2) {
     // Wyświetlenie salda
     print_char('=', 100, true, border_color, true);
     show_balance(text_color);
@@ -102,113 +100,108 @@ void UserInterface::print_exit() const {
             << get_color_code();
 }
 
-void UserInterface::show_balance(std::string text_color)
-{
-    std::cout << get_color_code(true, text_color) << "\nTwoje saldo wynosi: ";
-    std::cout << get_color_code(true, "green") << get_user()->get_balance() << " zł";
-    std::cout << std::endl << get_color_code();
+void UserInterface::show_balance(std::string text_color) {
+  std::cout << get_color_code(true, text_color) << "\nTwoje saldo wynosi: ";
+  std::cout << get_color_code(true, "green") << get_user()->get_balance()
+            << " zł";
+  std::cout << std::endl << get_color_code();
 }
 
-void UserInterface::add_balance(std::string text_color)
-{
+void UserInterface::add_balance(std::string text_color) {
   double value = get_user_double_input("Podaj wartość doładowania");
 
   double current_balance = get_user()->get_balance();
   get_user()->set_balance(current_balance + value);
 
-    std::cout << std::endl
-              << std::endl
-              << get_color_code(false, text_color)
-              << "Pomyślnie wpłacono kwotę o wartości: "
-              << get_color_code(true, "green") << value
-              << get_color_code(false, text_color) << " złotych na twoje konto!\n\n"
-              << get_color_code();
+  std::cout << std::endl
+            << std::endl
+            << get_color_code(false, text_color)
+            << "Pomyślnie wpłacono kwotę o wartości: "
+            << get_color_code(true, "green") << value
+            << get_color_code(false, text_color)
+            << " złotych na twoje konto!\n\n"
+            << get_color_code();
 }
 
-void UserInterface::show_user_info(std::string text_color)
-{
+void UserInterface::show_user_info(std::string text_color) {
   std::cout << get_color_code(true, text_color) << "\n == Twoje Konto ==\n\n"
-              << get_color_code(true, text_color) << ">> Nazwa: " <<
-              get_user()->get_name() << "\n>> Email: " <<
-              get_user()->get_email() << std::endl;
+            << get_color_code(true, text_color)
+            << ">> Nazwa: " << get_user()->get_name()
+            << "\n>> Email: " << get_user()->get_email() << std::endl;
   std::cout << get_color_code();
 }
 
-void UserInterface::choose_station(std::string text_color, std::string border_color)
-{
-  Database<RentalStation>& stations = get_station_data();
+void UserInterface::choose_station(std::string text_color,
+                                   std::string border_color) {
   print_char('=', 100, true, border_color, true);
-  std::cout<< std::endl;
+  std::cout << std::endl;
   int counter = 0;
-  for (auto& station : stations)
-    {
-      int bikes_on_station = station->get_capacity() - station->get_empty_spaces();
-      if(bikes_on_station >= 1)
-      {
-        std::cout << get_color_code(true, text_color);
-        counter++;
-        std::cout << "   " << counter << "> STACJA: " << station->get_name() <<
-        get_color_code(false, text_color) <<
-        " | lokalizacja: x=" << station->get_x() << ", y=" << station->get_y() <<
-        " | ilość rowerów: " << bikes_on_station <<
-        std::endl;
-      }
+  for (auto &station : station_data) {
+    std::cout << station->str() << std::endl;
+    int bikes_on_station =
+        station->get_capacity() - station->get_empty_spaces();
+    if (bikes_on_station >= 1) {
+      std::cout << get_color_code(true, text_color);
+      counter++;
+      std::cout << "   " << counter << "> STACJA: " << station->get_name()
+                << get_color_code(false, text_color)
+                << " | lokalizacja: x=" << station->get_x()
+                << ", y=" << station->get_y()
+                << " | ilość rowerów: " << bikes_on_station << std::endl;
     }
-
-  if(counter>0)
-  {
-  print_char('=', 100, true, border_color, true);
-  std::cout << get_color_code(true, text_color);
-  int choice = get_user_int_input("Wybierz stację");
-  std::cout << get_color_code();
-
-  if((choice>counter) || choice <= 0 )
-  {
-    std::cout << std::endl << get_color_code(true, "red") << "Nie ma takiego punktu wypożyczenia! :(\n";
   }
-  else
-  {
-    RentalStation* selected_station = stations[choice-1];
+
+  if (counter > 0) {
     print_char('=', 100, true, border_color, true);
-    choose_bike(selected_station, text_color);
-  }
-  }
-  else
-  {
-    std::cout << std::endl << get_color_code(true, "red") << "Brak dostępnych punktów wypożyczenia! :(\n";
+    std::cout << get_color_code(true, text_color);
+    int choice = get_user_int_input("Wybierz stację");
+    std::cout << get_color_code();
+
+    if ((choice > counter) || choice <= 0) {
+      std::cout << std::endl
+                << get_color_code(true, "red")
+                << "Nie ma takiego punktu wypożyczenia! :(\n";
+    } else {
+      RentalStation *selected_station = station_data[choice - 1];
+      print_char('=', 100, true, border_color, true);
+      choose_bike(selected_station, text_color);
+    }
+  } else {
+    std::cout << std::endl
+              << get_color_code(true, "red")
+              << "Brak dostępnych punktów wypożyczenia! :(\n";
   }
   std::cout << get_color_code() << std::endl;
 }
 
-void UserInterface::choose_bike(RentalStation* selected_station, std::string text_color, std::string border_color)
-{
+void UserInterface::choose_bike(RentalStation *selected_station,
+                                std::string text_color,
+                                std::string border_color) {
   std::string station_id = selected_station->get_id();
-  Database<Bicycle>& bikes = get_bikes_data();
-  std::cout<< get_color_code(false, text_color) << std::endl;
+  std::cout << get_color_code(false, text_color) << std::endl;
   int counter = 1;
-  for (auto& bike : bikes)
-    {
-      if((bike->get_station()==station_id) && bike->get_availability())
-      std::cout << "   " << counter << "> Rower: " << bike->get_name() <<
-      " | Cena wypożyczenia: " << bike->get_price() << " zł" << std::endl;
-      counter++;
-    }
+  for (auto &bike : bikes_data) {
+    if ((bike->get_station() == station_id) && bike->get_availability())
+      std::cout << "   " << counter << "> Rower: " << bike->get_name()
+                << " | Cena wypożyczenia: " << bike->get_price() << " zł"
+                << std::endl;
+    counter++;
+  }
 
   print_char('=', 100, true, border_color, true);
   std::cout << get_color_code(true, text_color);
   int choice = get_user_int_input("Wybierz rower");
   std::cout << get_color_code() << std::endl;
 
-  if((choice>counter) || choice <= 0 )
-  {
-    std::cout << std::endl << get_color_code(true, "red") << "Nie ma takiego roweru! :(\n";
-  }
-  else
-  {
-    Bicycle* selected_bike = bikes[choice-1];
+  if ((choice > counter) || choice <= 0) {
+    std::cout << std::endl
+              << get_color_code(true, "red") << "Nie ma takiego roweru! :(\n";
+  } else {
+    Bicycle *selected_bike = bikes_data[choice - 1];
     print_char('=', 100, true, border_color, true);
     // TODO: logika wypożyczenia roweru
-    std::cout << get_color_code(true, "green") << "\nWYPOŻYCZONO ROWER: " <<
-    selected_bike->get_name() << "! :)" << get_color_code();
+    std::cout << get_color_code(true, "green")
+              << "\nWYPOŻYCZONO ROWER: " << selected_bike->get_name() << "! :)"
+              << get_color_code();
   }
 }

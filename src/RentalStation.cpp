@@ -6,7 +6,7 @@ RentalStation::RentalStation(const std::string &name, const double &x,
                              const double &y, const int &capacity,
                              const int &empty_spaces) {
   if (capacity < 1) {
-    throw std::invalid_argument("Pojemoność nie może być mniejsza od 1.");
+    throw std::invalid_argument("Pojemność nie może być mniejsza od 1.");
   };
   this->name = name;
   this->x = x;
@@ -37,7 +37,8 @@ void RentalStation::load(const std::string &data) {
 }
 std::string RentalStation::str() {
   return get_id() + ',' + name + ',' + std::to_string(x) + ',' +
-         std::to_string(y) + ',' + std::to_string(capacity);
+         std::to_string(y) + ',' + std::to_string(capacity) + ',' +
+         std::to_string(empty_spaces);
 }
 std::vector<std::string> RentalStation::get_attributes() const {
   return {"id", "name", "x", "y", "capacity", "empty spaces"};
