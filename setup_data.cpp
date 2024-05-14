@@ -36,11 +36,11 @@ int main() {
   // RentalStation(const std::string &name, const double &x, const double &y,
   //               const int &capacity, const int &empty_spaces);
   std::unique_ptr<RentalStation> station1 =
-      std::make_unique<RentalStation>("Centrum", 52.2297, 21.0122, 100, 100);
+      std::make_unique<RentalStation>("Centrum", 52.2297, 21.0122, 100, 99);
   std::unique_ptr<RentalStation> station2 =
-      std::make_unique<RentalStation>("Mokotow", 52.1934, 21.0458, 100, 100);
+      std::make_unique<RentalStation>("Mokotow", 52.1934, 21.0458, 100, 99);
   std::unique_ptr<RentalStation> station3 =
-      std::make_unique<RentalStation>("Praga", 52.2552, 21.0570, 100, 100);
+      std::make_unique<RentalStation>("Praga", 52.2552, 21.0570, 100, 99);
 
   // Bicycle(const std::string &name, const double &price,
   //         const std::string &station_id, const bool &is_available);
