@@ -228,6 +228,13 @@ void BaseInterface::set_station_data(
   station_data = std::move(new_station_data);
 }
 
+void BaseInterface::set_rentals_data(
+  Database<Rent> &new_rentals_data)
+  {
+    rent_data = std::move(new_rentals_data);
+  }
+
+
 void BaseInterface::set_user(User *user) { user_ptr = user; };
 User *BaseInterface::get_user() { return user_ptr; };
 
@@ -249,4 +256,9 @@ Database<User>& BaseInterface::get_users_data()
 Database<User>& BaseInterface::get_admins_data()
 {
     return admins_data;
+}
+
+Database<Rent>& BaseInterface::get_rent_data()
+{
+  return rent_data;
 }
