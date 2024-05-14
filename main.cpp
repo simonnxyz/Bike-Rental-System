@@ -11,6 +11,7 @@ int main() {
   Database<User> admins("../database/admins.txt");
   Database<Bicycle> bikes("../database/bikes.txt");
   Database<RentalStation> stations("../database/stations.txt");
+
   try {
     // login
     BaseInterface *interface = new UserInterface();
@@ -18,9 +19,6 @@ int main() {
     interface->set_admins_data(admins);
 
     bool is_admin = interface->login();
-
-    // Tak dostajesz obecnego usera
-    // interface->get_user();
 
     if (is_admin) {
       User *admin = interface->get_user();
@@ -40,6 +38,8 @@ int main() {
 
     // run the main loop on the interface
     interface->run();
+
+    delete interface;
   } catch (const std::exception &e) {
     std::cerr << e.what() << '\n';
   }
