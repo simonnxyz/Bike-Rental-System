@@ -48,7 +48,7 @@ public:
   void set_user(User *user);
   User *get_user();
 
-public:
+protected:
   Database<User> users_data;
   Database<User> admins_data;
   Database<Bicycle> bikes_data;
