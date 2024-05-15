@@ -84,6 +84,6 @@ std::ostream &operator<<(std::ostream &os, const Rent &rent) {
   os << "Date: " << rent.get_date() << "\n";
   os << "User id: " << rent.get_user() << "\n";
   os << "Bicycle id: " << rent.get_bicycle() << "\n";
-  os << "Has ended: " << rent.get_has_ended() << "\n";
+  os << "Has ended: " << (rent.get_has_ended() ? "true" : "false") << " }\n";
   return os;
 }

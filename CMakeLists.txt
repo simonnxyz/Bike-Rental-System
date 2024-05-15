@@ -19,7 +19,7 @@ add_library(rent include/Rent.h src/Rent.cpp)
 target_link_libraries(model PRIVATE uuid)
 
 target_link_libraries(user PRIVATE model)
-target_link_libraries(user PRIVATE sha256) 
+target_link_libraries(user PRIVATE sha256)
 
 target_link_libraries(bicycle PRIVATE model)
 
@@ -89,6 +89,7 @@ add_executable(
   tests/DatabaseTest.cpp
   tests/BicycleTest.cpp
   tests/RentalStationTest.cpp
+  tests/RentTest.cpp
 )
 # tutaj dodawajcie pliki tekstowe
 target_link_libraries(
