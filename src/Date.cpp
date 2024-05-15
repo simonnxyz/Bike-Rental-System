@@ -56,6 +56,10 @@ bool Date::is_valid_date(int day, int month, int year) {
     return false;
   }
 
+  if (year <= 0) {
+    return false;
+  }
+
   return true;
 }
 
@@ -167,7 +171,7 @@ Date &Date::operator++() {
   return *this;
 }
 
-bool Date::is_leap_year(int year) const {
+bool Date::is_leap_year(int year) {
   if (year % 4 != 0) {
     return false;
   } else if (year % 100 != 0) {
