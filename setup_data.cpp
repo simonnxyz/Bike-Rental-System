@@ -12,10 +12,13 @@ int main() {
   std::ofstream("../database/admins.txt", std::ios::trunc);
   std::ofstream("../database/bikes.txt", std::ios::trunc);
   std::ofstream("../database/stations.txt", std::ios::trunc);
+  std::ofstream date_file("../database/date.txt", std::ios::trunc);
 
   Date date;
   ++date;
   std::cout << date.str() << std::endl;
+  date_file.write(date.str().c_str(), 10);
+  date_file.close();
 
   Database<User> users("../database/users.txt");
   Database<User> admins("../database/admins.txt");

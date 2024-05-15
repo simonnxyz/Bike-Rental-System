@@ -1,6 +1,19 @@
 #include "../include/BaseInterface.h"
 
-BaseInterface::BaseInterface() {}
+BaseInterface::BaseInterface() {
+  std::fstream date_file("../database/date.txt");
+  std::string date_str;
+  date_file >> date_str;
+  current_date = Date(date_str);
+};
+
+BaseInterface::~BaseInterface() { save_date(); }
+
+void BaseInterface::save_date() {
+  std::ofstream date_file("../database/date.txt", std::ios::trunc);
+  date_file.write(current_date.str().c_str(), 10);
+  date_file.close();
+}
 
 void BaseInterface::print_options(const std::vector<std::string> options,
                                   int width, std::string text_color) const {

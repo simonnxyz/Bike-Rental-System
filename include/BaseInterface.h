@@ -1,5 +1,6 @@
 #include "../include/Bicycle.h"
 #include "../include/Database.h"
+#include "../include/Date.h"
 #include "../include/Rent.h"
 #include "../include/RentalStation.h"
 #include "../include/User.h"
@@ -12,6 +13,7 @@ class BaseInterface {
 public:
   // Konstruktor
   BaseInterface();
+  ~BaseInterface();
 
   virtual void run() = 0;
   virtual void exit() = 0;
@@ -48,6 +50,8 @@ public:
   void set_user(User *user);
   User *get_user();
 
+  void save_date();
+
 protected:
   Database<User> users_data;
   Database<User> admins_data;
@@ -56,4 +60,5 @@ protected:
   Database<Rent> rent_data;
 
   User *user_ptr;
+  Date current_date;
 };

@@ -60,46 +60,60 @@ void UserInterface::redirect_from_starting_menu(std::string text_color,
   if (choice == 1) {
     // Wybranie punktu wypożyczenia (następnie wybranie również roweru)
     RentalStation *selected_station = choose_station(text_color, border_color);
-    if (selected_station) {
-      Bicycle *selected_bike =
-          choose_bike(selected_station, "rent", text_color, border_color);
-      std::cout << selected_bike->str() << std::endl;
-      if (selected_bike) {
-        rent_data.add(std::make_unique<Rent>("07.08.2005", get_user()->get_id(),
-                                             selected_bike->get_id()));
-        if (selected_bike) {
-          selected_bike->set_availability(false);
-          selected_station->set_empty_spaces(
-              std::max(selected_station->get_empty_spaces() + 1,
-                       selected_station->get_capacity()));
-        }
-      }
+    if (selected_station == nullptr) {
+      std::cout << "Nie wybrano stacji\n";
+      return;
+    }
+
+    Bicycle *selected_bike =
+        choose_bike(selected_station, "rent", text_color, border_color);
+    if (user_ptr->get_balance() < selected_bike->get_price()) {
+      std::cout << "Brak środków na koncie, doładuj konto\n";
+      return;
+    }
+
+    user_ptr->set_balance(user_ptr->get_balance() - selected_bike->get_price());
+    if (selected_bike != nullptr) {
+      rent_data.add(std::make_unique<Rent>(
+          current_date.str(), get_user()->get_id(), selected_bike->get_id()));
+      selected_bike->set_availability(false);
+      selected_station->set_empty_spaces(
+          std::max(selected_station->get_empty_spaces() + 1,
+                   selected_station->get_capacity()));
     }
   } else if (choice == 2) {
     // Oddanie roweru na wybranej stacji
     RentalStation *selected_station = choose_station(text_color, border_color);
-    if (selected_station) {
-      Bicycle *selected_bike =
-          choose_bike(selected_station, "return", text_color, border_color);
-      if (selected_bike) {
-        selected_bike->set_availability(true);
-        selected_station->set_empty_spaces(
-            std::max(selected_station->get_empty_spaces() - 1, 0));
-        selected_bike->set_station(selected_station->get_id());
-      }
+    if (!selected_station || selected_station->get_empty_spaces() == 0) {
+      std::cout << "Ta stacja jest pełna\n";
+      return;
+    }
 
-      // wez wyprintuj ze zwrocono i wyzej ze wypozyczono
+    Bicycle *selected_bike =
+        choose_bike(selected_station, "return", text_color, border_color);
+
+    if (selected_bike != nullptr) {
+      selected_bike->set_availability(true);
+      selected_station->set_empty_spaces(selected_station->get_empty_spaces() -
+                                         1);
+      selected_bike->set_station(selected_station->get_id());
+      Rent *rent = rent_data.find({{"user_id", get_user()->get_id()},
+                                   {"bicycle_id", selected_bike->get_id()},
+                                   {"has_ended", "false"}});
+      if (rent) {
+        rent->set_has_ended(true);
+      } else {
+        std::cout << "Nie znaleziono wypożyczenia\n";
+      }
     }
   } else if (choice == 3) {
     // Wyświetlenie salda
     print_char('=', 100, true, border_color, true);
     show_balance(text_color);
-
   } else if (choice == 4) {
     // Doładowanie środków
     print_char('=', 100, true, border_color, true);
     add_balance(text_color);
-
   } else if (choice == 5) {
     // Wyświetlenie informacji o koncie
     print_char('=', 100, true, border_color, true);
@@ -109,21 +123,21 @@ void UserInterface::redirect_from_starting_menu(std::string text_color,
     print_char('=', 100, true, border_color, true);
     show_history(text_color);
     std::cout << get_color_code();
-
   } else if (choice == 7) {
     // Wyjście
     exit();
-  }
-  else if (choice==966 || choice == 1385 || choice==1410 || choice==1610 || choice == 1918 || choice == 1989)
-  {
+  } else if (choice == 966 || choice == 1385 || choice == 1410 ||
+             choice == 1610 || choice == 1918 || choice == 1989) {
     print_char('=', 50, false, "white", true);
     print_char('=', 50, true, "red", true);
-    std::cout << std::endl << get_color_code(true, "white") << "Chwała " << get_color_code(true, "red") << "Wielkiej " <<
-    get_color_code(true, "white") << "Polsce " << get_color_code(true, "red") << "!!!\n";
+    std::cout << std::endl
+              << get_color_code(true, "white") << "Chwała "
+              << get_color_code(true, "red") << "Wielkiej "
+              << get_color_code(true, "white") << "Polsce "
+              << get_color_code(true, "red") << "!!!\n";
     print_char('=', 50, true, "white", true);
     print_char('=', 50, false, "red", true);
-  }
-  else {
+  } else {
     std::cout << "Wybierz jedną z dostępnych opcji (1-7)\n";
   }
 }
@@ -221,42 +235,42 @@ RentalStation *UserInterface::choose_station(std::string text_color,
 Bicycle *UserInterface::choose_bike(RentalStation *selected_station,
                                     std::string mode, std::string text_color,
                                     std::string border_color) {
-  if (selected_station) {
-    std::string station_id = selected_station->get_id();
-    std::cout << get_color_code(false, text_color) << std::endl;
-
-    std::vector<Bicycle *> bikes;
-    if (mode == "rent") {
-      bikes = list_available_bikes(station_id, text_color);
-    } else if (mode == "return") {
-      bikes = list_rented_bikes(text_color);
-    }
-
-    if (!(bikes.empty())) {
-      print_char('=', 100, true, border_color, true);
-      std::cout << get_color_code(true, text_color);
-      int choice = get_user_int_input("Wybierz rower");
-      std::cout << get_color_code() << std::endl;
-
-      if ((choice > bikes.size()) || choice <= 0) {
-        std::cout << std::endl
-                  << get_color_code(true, "red")
-                  << "Nie ma takiego roweru! :(\n";
-      } else {
-        std::cout << bikes[choice - 1]->str() << std::endl;
-        Bicycle *selected_bike = bikes[choice - 1];
-        return selected_bike;
-      }
-    } else {
-      std::cout << std::endl
-                << get_color_code(true, "red")
-                << "Brak dostępnych rowerów! :(\n";
-    }
-  } else {
+  if (!selected_station) {
     std::cerr << std::endl
               << get_color_code(true, "red")
               << "Błąd przy wczytywaniu stacji! :(\n";
+    return nullptr;
   }
+
+  std::string station_id = selected_station->get_id();
+  std::cout << get_color_code(false, text_color) << std::endl;
+
+  std::vector<Bicycle *> bikes;
+  if (mode == "rent") {
+    bikes = list_available_bikes(station_id, text_color);
+  } else if (mode == "return") {
+    bikes = list_rented_bikes(text_color);
+  }
+
+  if (bikes.empty()) {
+    std::cout << std::endl
+              << get_color_code(true, "red") << "Brak dostępnych rowerów! :(\n";
+    return nullptr;
+  }
+
+  print_char('=', 100, true, border_color, true);
+  std::cout << get_color_code(true, text_color);
+  int choice = get_user_int_input("Wybierz rower");
+  std::cout << get_color_code() << std::endl;
+
+  if ((choice > bikes.size()) || choice <= 0) {
+    std::cout << std::endl
+              << get_color_code(true, "red") << "Nie ma takiego roweru! :(\n";
+  } else {
+    Bicycle *selected_bike = bikes[choice - 1];
+    return selected_bike;
+  }
+
   return nullptr;
 }
 
@@ -284,7 +298,8 @@ UserInterface::list_rented_bikes(std::string text_color) {
   std::vector<Bicycle *> rented_bikes;
   int counter = 0;
   for (auto &rental : rent_data) {
-    if (rental->get_user() == get_user()->get_id()) {
+    if (rental->get_user() == get_user()->get_id() &&
+        !rental->get_has_ended()) {
       counter += 1;
       Bicycle *bike = bikes_data.find_by_id(rental->get_bicycle());
       std::cout << "   " << counter << "> Rower: " << bike->get_name()
@@ -306,7 +321,11 @@ void UserInterface::show_history(std::string text_color) {
       if (counter == 1)
         std::cout << get_color_code(true, "cyan") << " == HISTORIA ==\n\n";
       std::cout << "> " << counter << ": " << rental->get_date()
-                << " wypożyczono rower: " << rental->get_bicycle() << std::endl;
+                << " wypożyczono rower: " << rental->get_bicycle();
+      if (rental->get_has_ended()) {
+        std::cout << " (zakończono)\n";
+      }
+      std::cout << std::endl;
     }
   }
   if (counter < 1) {

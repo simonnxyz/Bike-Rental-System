@@ -20,11 +20,13 @@ public:
   void set_date(const std::string &date);
   void set_user(const std::string &user_id);
   void set_bicycle(const std::string &bicycle_id);
+  void set_has_ended(bool);
 
   // Getters
   std::string get_date() const;
   std::string get_user() const;
   std::string get_bicycle() const;
+  bool get_has_ended() const;
 
   // Overloaded operators
   bool operator==(const Rent &other) const;
@@ -37,4 +39,6 @@ private:
   std::string date;
   std::string user_id;
   std::string bicycle_id;
+
+  bool has_ended = false;
 };

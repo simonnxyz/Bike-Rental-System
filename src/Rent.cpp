@@ -17,30 +17,35 @@ void Rent::load(const std::string &data) {
   while (std::getline(ss, part, ',')) {
     parts.push_back(part);
   }
-  if (parts.size() != 4) {
+  if (parts.size() != 5) {
     throw std::invalid_argument("Nieprawidłowy format danych: " + data);
   }
   this->set_id(parts[0]);
   this->set_date(parts[1]);
   this->set_user(parts[2]);
   this->set_bicycle(parts[3]);
+  this->set_has_ended(parts[4] == "true" ? true : false);
 }
 
 std::string Rent::str() {
   return this->get_id() + "," + this->get_date() + "," + this->get_user() +
-         "," + this->get_bicycle();
+         "," + this->get_bicycle() + "," +
+         (this->get_has_ended() ? "true" : "false");
 }
 
 std::vector<std::string> Rent::get_attributes() const {
-  return {"id", "date", "user_id", "bicycle_id"};
+  return {"id", "date", "user_id", "bicycle_id", "has_ended"};
 }
 
 bool Rent::check_query(const std::map<std::string, std::string> &query) const {
   std::stringstream ss;
-  std::map<std::string, std::string> rent_map = {{"id", get_id()},
-                                                 {"date", get_date()},
-                                                 {"user_id", get_user()},
-                                                 {"bicycle_id", get_bicycle()}};
+  std::map<std::string, std::string> rent_map = {
+      {"id", get_id()},
+      {"date", get_date()},
+      {"user_id", get_user()},
+      {"bicycle_id", get_bicycle()},
+      {"has_ended", get_has_ended() ? "true" : "false"}};
+
   for (auto const &pair : query) {
     auto it = rent_map.find(pair.first);
     if (it != rent_map.end() && it->second == pair.second) {
@@ -57,11 +62,15 @@ void Rent::set_user(const std::string &user_id) { this->user_id = user_id; }
 void Rent::set_bicycle(const std::string &bicycle_id) {
   this->bicycle_id = bicycle_id;
 }
+void Rent::set_has_ended(bool new_has_ended) {
+  this->has_ended = new_has_ended;
+}
 
 // Getters
 std::string Rent::get_date() const { return this->date; }
 std::string Rent::get_user() const { return this->user_id; }
 std::string Rent::get_bicycle() const { return this->bicycle_id; }
+bool Rent::get_has_ended() const { return this->has_ended; }
 
 // Overloaded operators
 bool Rent::operator==(const Rent &other) const {
@@ -75,5 +84,6 @@ std::ostream &operator<<(std::ostream &os, const Rent &rent) {
   os << "Date: " << rent.get_date() << "\n";
   os << "User id: " << rent.get_user() << "\n";
   os << "Bicycle id: " << rent.get_bicycle() << "\n";
+  os << "Has ended: " << rent.get_has_ended() << "\n";
   return os;
 }

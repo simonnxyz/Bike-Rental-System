@@ -41,6 +41,7 @@ target_link_libraries(BaseInterface PRIVATE rentalStation)
 target_link_libraries(BaseInterface PRIVATE rent)
 target_link_libraries(BaseInterface PRIVATE model)
 target_link_libraries(BaseInterface PRIVATE database)
+target_link_libraries(BaseInterface PRIVATE date)
 
 target_link_libraries(UserInterface PRIVATE BaseInterface)
 

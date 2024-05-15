@@ -12,6 +12,7 @@ int main() {
   Database<User> admins("../database/admins.txt");
   Database<Bicycle> bikes("../database/bikes.txt");
   Database<RentalStation> stations("../database/stations.txt");
+  Database<Rent> rentals("../database/rentals.txt");
 
   try {
     // login
@@ -36,6 +37,7 @@ int main() {
     interface->set_users_data(users);
     interface->set_bikes_data(bikes);
     interface->set_station_data(stations);
+    interface->set_rentals_data(rentals);
 
     // run the main loop on the interface
     interface->run();
