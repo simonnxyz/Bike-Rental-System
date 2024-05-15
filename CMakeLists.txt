@@ -11,6 +11,7 @@ add_library(database include/Database.h)
 add_library(user include/User.h src/User.cpp)
 add_library(BaseInterface include/BaseInterface.h src/BaseInterface.cpp)
 add_library(UserInterface include/UserInterface.h src/UserInterface.cpp)
+add_library(AdminInterface include/AdminInterface.h src/AdminInterface.cpp)
 add_library(bicycle include/Bicycle.h src/Bicycle.cpp)
 add_library(rentalStation include/RentalStation.h src/RentalStation.cpp)
 add_library(rent include/Rent.h src/Rent.cpp)
@@ -44,6 +45,7 @@ target_link_libraries(BaseInterface PRIVATE database)
 target_link_libraries(BaseInterface PRIVATE date)
 
 target_link_libraries(UserInterface PRIVATE BaseInterface)
+target_link_libraries(AdminInterface PRIVATE BaseInterface)
 
 add_executable(
   main
@@ -70,6 +72,7 @@ target_link_libraries(main PRIVATE rent)
 target_link_libraries(main PRIVATE database)
 target_link_libraries(main PRIVATE BaseInterface)
 target_link_libraries(main PRIVATE UserInterface)
+target_link_libraries(main PRIVATE AdminInterface)
 
 target_link_libraries(setup_data PRIVATE user)
 target_link_libraries(setup_data PRIVATE bicycle)

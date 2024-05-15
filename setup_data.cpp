@@ -15,7 +15,6 @@ int main() {
   std::ofstream date_file("../database/date.txt", std::ios::trunc);
 
   Date date;
-  ++date;
   std::cout << date.str() << std::endl;
   date_file.write(date.str().c_str(), 10);
   date_file.close();

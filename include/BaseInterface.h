@@ -9,6 +9,8 @@
 #include <string>
 #include <vector>
 
+#pragma once
+
 class BaseInterface {
 public:
   // Konstruktor

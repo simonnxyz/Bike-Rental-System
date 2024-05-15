@@ -35,7 +35,6 @@ public:
 
   // Others
 private:
-  std::string rent_id;
   std::string date;
   std::string user_id;
   std::string bicycle_id;

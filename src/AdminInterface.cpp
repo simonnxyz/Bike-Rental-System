@@ -76,10 +76,12 @@ void AdminInterface::redirect_from_starting_menu(std::string text_color,
     // medytuj przez 24h
     ++current_date;
     save_date();
-    std::cout << "Medytacja zakończona\n";
     // Loop over users and check if they have rented bikes,
     // if so take money from their account
     for (auto &rental : rent_data) {
+      if (rental->get_has_ended())
+        continue;
+
       User *user = users_data.find_by_id(rental->get_user());
       Bicycle *bike = bikes_data.find_by_id(rental->get_bicycle());
 
@@ -90,6 +92,7 @@ void AdminInterface::redirect_from_starting_menu(std::string text_color,
         bike->set_availability(true);
       }
     }
+    std::cout << "Medytacja zakończona\n";
   } else if (choice == 7) {
     // Wyjście
     exit();

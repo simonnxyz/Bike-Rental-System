@@ -1,4 +1,5 @@
 // #include "./include/AdminInterface.h"
+#include "./include/AdminInterface.h"
 #include "./include/Bicycle.h"
 #include "./include/Database.h"
 #include "./include/Rent.h"
@@ -6,6 +7,7 @@
 #include "./include/User.h"
 #include "./include/UserInterface.h"
 #include <iomanip>
+
 
 int main() {
   Database<User> users("../database/users.txt");
@@ -26,7 +28,7 @@ int main() {
       User *admin = interface->get_user();
 
       // change this to AdminInterface when its ready
-      interface = new UserInterface();
+      interface = new AdminInterface();
       interface->set_user(admin);
     }
 
