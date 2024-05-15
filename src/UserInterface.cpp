@@ -105,12 +105,12 @@ void UserInterface::redirect_from_starting_menu(std::string text_color,
   }
   else if (choice==966 || choice == 1385 || choice==1410 || choice==1610 || choice == 1918 || choice == 1989)
   {
-    print_char('=', width, false, "white", true);
-    print_char('=', width, false, "red", true);
+    print_char('=', width/2, false, "white", true);
+    print_char('=', width/2, false, "red", true);
     std::cout << std::endl << get_color_code(true, "white") << "Chwała " << get_color_code(true, "red") << "Wielkiej " <<
     get_color_code(true, "white") << "Polsce " << get_color_code(true, "red") << "!!!\n";
-    print_char('=', width, false, "white", true);
-    print_char('=', width, false, "red", true);
+    print_char('=', width/2, false, "white", true);
+    print_char('=', width/2, false, "red", true);
   }
   else {
     std::cout << "Wybierz jedną z dostępnych opcji (1-7)\n";
