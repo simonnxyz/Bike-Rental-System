@@ -315,13 +315,14 @@ void UserInterface::show_history(std::string text_color) {
   std::cout << get_color_code(false, text_color) << std::endl;
   int counter = 0;
   for (auto &rental : rent_data) {
-    std::cout << "wchodzimy do petli";
     if (rental->get_user() == get_user()->get_id()) {
       counter += 1;
       if (counter == 1)
         std::cout << get_color_code(true, "cyan") << " == HISTORIA ==\n\n";
       std::cout << "> " << counter << ": " << rental->get_date()
-                << " wypożyczono rower: " << rental->get_bicycle();
+                << " wypożyczono rower: "
+                << bikes_data.find_by_id(rental->get_bicycle())->get_name()
+                << " | ";
       if (rental->get_has_ended()) {
         std::cout << " (zakończono)\n";
       }
