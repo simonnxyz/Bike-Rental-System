@@ -72,14 +72,20 @@ void UserInterface::redirect_from_starting_menu(std::string text_color,
       return;
     }
 
-    user_ptr->set_balance(user_ptr->get_balance() - selected_bike->get_price());
     if (selected_bike != nullptr) {
+      std::cout << user_ptr->get_id()
+                << " wybiera rower: " << selected_bike->get_id() << std::endl;
+      user_ptr->set_balance(user_ptr->get_balance() -
+                            selected_bike->get_price());
       rent_data.add(std::make_unique<Rent>(
           current_date.str(), get_user()->get_id(), selected_bike->get_id()));
       selected_bike->set_availability(false);
       selected_station->set_empty_spaces(
           std::max(selected_station->get_empty_spaces() + 1,
                    selected_station->get_capacity()));
+      std::cout << get_color_code(false, text_color)
+                << "Wypożyczono rower: " << selected_bike->get_name()
+                << std::endl;
     }
   } else if (choice == 2) {
     // Oddanie roweru na wybranej stacji
@@ -315,6 +321,7 @@ void UserInterface::show_history(std::string text_color) {
   std::cout << get_color_code(false, text_color) << std::endl;
   int counter = 0;
   for (auto &rental : rent_data) {
+    std::cout << rental->str() << std::endl;
     if (rental->get_user() == get_user()->get_id()) {
       counter += 1;
       if (counter == 1)
