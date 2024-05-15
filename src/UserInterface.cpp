@@ -74,23 +74,10 @@ void UserInterface::redirect_from_starting_menu(std::string text_color,
       std::cout << "Ta stacja jest pełna\n";
       return;
     }
-
     Bicycle *selected_bike =
         choose_bike(selected_station, "return", text_color, border_color);
-
     if (selected_bike != nullptr) {
-      selected_bike->set_availability(true);
-      selected_station->set_empty_spaces(selected_station->get_empty_spaces() -
-                                         1);
-      selected_bike->set_station(selected_station->get_id());
-      Rent *rent = rent_data.find({{"user_id", get_user()->get_id()},
-                                   {"bicycle_id", selected_bike->get_id()},
-                                   {"has_ended", "false"}});
-      if (rent) {
-        rent->set_has_ended(true);
-      } else {
-        std::cout << "Nie znaleziono wypożyczenia\n";
-      }
+      return_bike(selected_station, selected_bike, text_color);
     }
   } else if (choice == 3) {
     // Wyświetlenie salda
@@ -344,4 +331,18 @@ void UserInterface::rent_bike(RentalStation* selected_station, Bicycle *selected
                 << "Wypożyczono rower: " << selected_bike->get_name() <<
                 get_color_code() << std::endl;
     }
+}
+
+void UserInterface::return_bike(RentalStation* selected_station, Bicycle *selected_bike, std::string text_color) {
+  selected_bike->set_availability(true);
+  selected_station->set_empty_spaces(selected_station->get_empty_spaces() - 1);
+  selected_bike->set_station(selected_station->get_id());
+  Rent *rent = rent_data.find({{"user_id", get_user()->get_id()},
+                                {"bicycle_id", selected_bike->get_id()},
+                                {"has_ended", "false"}});
+  if (rent) {
+    rent->set_has_ended(true);
+  } else {
+    std::cout << "Nie znaleziono wypożyczenia\n";
+  }
 }

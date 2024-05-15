@@ -29,6 +29,7 @@ public:
   RentalStation* choose_station(std::string text_color="cyan", std::string border_color = "blue");
   Bicycle* choose_bike(RentalStation* selected_station, std::string mode="rent", std::string text_color="cyan", std::string border_color="blue");
   void rent_bike(RentalStation* selected_station, Bicycle *selected_bike, std::string text_color= "cyan");
+  void return_bike(RentalStation* selected_station, Bicycle *selected_bike, std::string text_color= "cyan");
 
   // Zakończenie pętli
   void print_exit() const;
