@@ -90,6 +90,7 @@ add_executable(
   tests/BicycleTest.cpp
   tests/RentalStationTest.cpp
   tests/RentTest.cpp
+  tests/DateTest.cpp
 )
 # tutaj dodawajcie pliki tekstowe
 target_link_libraries(
@@ -102,6 +103,7 @@ target_link_libraries(
   database
   bicycle
   rentalStation
+  date
 )
 # tu musicie dorzucić nazwy klas ktore zrobiliscie
 
