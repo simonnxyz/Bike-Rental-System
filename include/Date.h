@@ -5,24 +5,22 @@
 
 class Date {
 public:
-  Date(int day, int month, int year);
-  Date(std::string date);
+  //Constructors
+  Date(const int &day, const int &month, const int &year);
+  Date(const std::string &date);
   Date();
 
-  static bool is_valid_date(int day, int month, int year);
+  //Setters
+  void set_day(const int &day);
+  void set_month(const int &month);
+  void set_year(const int &year);
 
-  int get_day();
-  int get_month();
-  int get_year();
-  static std::string month_name(int month);
+  //Getters
+  int get_day() const;
+  int get_month() const;
+  int get_year() const;
 
-  void set_day(int day);
-  void set_month(int month);
-  void set_year(int year);
-
-  std::string str();
-  static bool is_leap_year(int year);
-
+  //Overloaded operators
   bool operator==(const Date &date) const;
   bool operator!=(const Date &date) const;
   bool operator<(const Date &date) const;
@@ -30,8 +28,16 @@ public:
   bool operator<=(const Date &date) const;
   bool operator>=(const Date &date) const;
 
-  Date operator+(int days) const;
+  Date operator+(const int &days) const;
   Date &operator++();
+
+  //Static methods
+  static std::string month_name(const int &month);
+  static bool is_valid_date(const int &day, const int &month, const int &year);
+  static bool is_leap_year(const int &year);
+
+  //Others
+  std::string str() const;
 
 private:
   int day;
