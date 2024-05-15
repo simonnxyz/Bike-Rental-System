@@ -26,7 +26,7 @@ public:
 
   // Funkcje przetwarzające dane
   void add_balance(std::string text_color="cyan");
-  RentalStation* choose_station(std::string text_color="cyan", std::string border_color = "blue");
+  RentalStation* choose_station(std::string mode="rent", std::string text_color="cyan", std::string border_color = "blue");
   Bicycle* choose_bike(RentalStation* selected_station, std::string mode="rent", std::string text_color="cyan", std::string border_color="blue");
   void rent_bike(RentalStation* selected_station, Bicycle *selected_bike, std::string text_color= "cyan");
   void return_bike(RentalStation* selected_station, Bicycle *selected_bike, std::string text_color= "cyan");

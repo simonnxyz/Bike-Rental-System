@@ -59,7 +59,7 @@ void UserInterface::redirect_from_starting_menu(std::string text_color,
 
   if (choice == 1) {
     // Wybranie punktu wypożyczenia (następnie wybranie również roweru)
-    RentalStation *selected_station = choose_station(text_color, border_color);
+    RentalStation *selected_station = choose_station("rent", text_color, border_color);
     if (selected_station == nullptr) {
       std::cout << "Nie wybrano stacji\n";
       return;
@@ -69,7 +69,7 @@ void UserInterface::redirect_from_starting_menu(std::string text_color,
     rent_bike(selected_station, selected_bike);
   } else if (choice == 2) {
     // Oddanie roweru na wybranej stacji
-    RentalStation *selected_station = choose_station(text_color, border_color);
+    RentalStation *selected_station = choose_station("return", text_color, border_color);
     if (!selected_station || selected_station->get_empty_spaces() == 0) {
       std::cout << "Ta stacja jest pełna\n";
       return;
@@ -162,7 +162,7 @@ void UserInterface::show_user_info(std::string text_color) {
   std::cout << get_color_code();
 }
 
-RentalStation *UserInterface::choose_station(std::string text_color,
+RentalStation *UserInterface::choose_station(std::string mode, std::string text_color,
                                              std::string border_color) {
   print_char('=', 100, true, border_color, true);
   std::cout << std::endl;
@@ -170,7 +170,7 @@ RentalStation *UserInterface::choose_station(std::string text_color,
   for (auto &station : station_data) {
     int bikes_on_station =
         station->get_capacity() - station->get_empty_spaces();
-    if (bikes_on_station >= 1) {
+    if(((mode=="rent") && bikes_on_station >= 1) || ((mode=="return") && bikes_on_station < station->get_capacity())){
       std::cout << get_color_code(true, text_color);
       counter++;
       std::cout << "   " << counter << "> STACJA: " << station->get_name()
