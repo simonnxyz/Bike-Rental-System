@@ -21,7 +21,7 @@ public:
   void set_year(int year);
 
   std::string str();
-  bool is_leap_year(int year) const;
+  static bool is_leap_year(int year);
 
   bool operator==(const Date &date) const;
   bool operator!=(const Date &date) const;
