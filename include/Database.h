@@ -133,6 +133,10 @@ public:
       file << member->str() << "\n";
     }
   };
+  void save() {
+    std::ofstream file(filename);
+    save(file);
+  };
 
   // iterators
   typename std::vector<std::unique_ptr<T>>::const_iterator begin() const {

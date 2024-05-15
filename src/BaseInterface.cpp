@@ -194,6 +194,7 @@ bool BaseInterface::login() {
       std::unique_ptr<User> user =
           std::make_unique<User>(name, login, password);
       users_data.add(std::move(user));
+      users_data.save();
       print_char(' ', (width - register_success.length()) / 2, false);
       std::cout << get_color_code(true, border_color) << register_success;
       std::cout << std::endl << std::endl << get_color_code();
