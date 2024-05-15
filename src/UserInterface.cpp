@@ -64,29 +64,9 @@ void UserInterface::redirect_from_starting_menu(std::string text_color,
       std::cout << "Nie wybrano stacji\n";
       return;
     }
-
     Bicycle *selected_bike =
         choose_bike(selected_station, "rent", text_color, border_color);
-    if (user_ptr->get_balance() < selected_bike->get_price()) {
-      std::cout << "Brak środków na koncie, doładuj konto\n";
-      return;
-    }
-
-    if (selected_bike != nullptr) {
-      std::cout << user_ptr->get_id()
-                << " wybiera rower: " << selected_bike->get_id() << std::endl;
-      user_ptr->set_balance(user_ptr->get_balance() -
-                            selected_bike->get_price());
-      rent_data.add(std::make_unique<Rent>(
-          current_date.str(), get_user()->get_id(), selected_bike->get_id()));
-      selected_bike->set_availability(false);
-      selected_station->set_empty_spaces(
-          std::max(selected_station->get_empty_spaces() + 1,
-                   selected_station->get_capacity()));
-      std::cout << get_color_code(false, text_color)
-                << "Wypożyczono rower: " << selected_bike->get_name()
-                << std::endl;
-    }
+    rent_bike(selected_station, selected_bike);
   } else if (choice == 2) {
     // Oddanie roweru na wybranej stacji
     RentalStation *selected_station = choose_station(text_color, border_color);
@@ -321,7 +301,6 @@ void UserInterface::show_history(std::string text_color) {
   std::cout << get_color_code(false, text_color) << std::endl;
   int counter = 0;
   for (auto &rental : rent_data) {
-    std::cout << rental->str() << std::endl;
     if (rental->get_user() == get_user()->get_id()) {
       counter += 1;
       if (counter == 1)
@@ -342,4 +321,27 @@ void UserInterface::show_history(std::string text_color) {
               << "Jeszcze nie wypożyczono żadnego roweru\n";
   }
   std::cout << std::endl;
+}
+
+void UserInterface::rent_bike(RentalStation* selected_station, Bicycle *selected_bike, std::string text_color)
+{
+  if (user_ptr->get_balance() < selected_bike->get_price()) {
+      std::cout << get_color_code(true, "red") << "Brak środków na koncie, doładuj konto\n" <<
+      get_color_code();
+      return;
+    }
+
+    if (selected_bike != nullptr) {
+      user_ptr->set_balance(user_ptr->get_balance() -
+                            selected_bike->get_price());
+      rent_data.add(std::make_unique<Rent>(
+          current_date.str(), get_user()->get_id(), selected_bike->get_id()));
+      selected_bike->set_availability(false);
+      selected_station->set_empty_spaces(
+          std::max(selected_station->get_empty_spaces() + 1,
+                   selected_station->get_capacity()));
+      std::cout << get_color_code(false, "green")
+                << "Wypożyczono rower: " << selected_bike->get_name() <<
+                get_color_code() << std::endl;
+    }
 }
