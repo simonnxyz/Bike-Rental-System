@@ -163,7 +163,7 @@ bool BaseInterface::login() {
     std::string title_text = "=== WITAMY W ROWEROWNI ===";
     std::string register_success = "=== Zarejestrowano ===";
     std::string login_success = "=== Zalogowano ===";
-    std::string login_fail = "=== Nie ma takiego użytkownika ===";
+    std::string login_fail = "=== Błędny email lub hasło ===";
     std::cout << std::endl;
 
     print_char(' ', (width - title_text.length()) / 2, false);

@@ -147,7 +147,7 @@ void UserInterface::add_balance(std::string text_color) {
   std::cout << std::endl
             << std::endl
             << get_color_code(false, text_color)
-            << "Pomyślnie wpłacono kwotę o wartości: "
+            << "Pomyślnie wpłacono kwotę o wartości "
             << get_color_code(true, "green") << rounded_value
             << get_color_code(false, text_color)
             << " złotych na twoje konto!\n\n"
