@@ -170,7 +170,7 @@ bool BaseInterface::login() {
     std::cout << get_color_code(true, border_color) << title_text;
     std::cout << std::endl << std::endl << get_color_code();
     // print login options
-    std::vector<std::string> options = {"1. Login", "2. Rejestracja"};
+    std::vector<std::string> options = {"1. Logowanie", "2. Rejestracja"};
     print_options(options, width, "cyan");
     print_char('=', width, true, "blue", true);
     std::cout << get_color_code(true, "cyan");
@@ -186,7 +186,7 @@ bool BaseInterface::login() {
     std::cout << get_color_code(true, "blue") << options[choice - 1]
               << get_color_code() << std::endl;
     std::string login = get_user_str_input("Email");
-    std::string password = get_user_str_input("Password");
+    std::string password = get_user_str_input("Hasło");
 
     if (choice == 2) {
       // register

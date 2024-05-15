@@ -61,24 +61,27 @@ void UserInterface::redirect_from_starting_menu(std::string text_color,
     // Wybranie punktu wypożyczenia (następnie wybranie również roweru)
     RentalStation *selected_station = choose_station("rent", text_color, border_color);
     if (selected_station == nullptr) {
-      std::cout << "Nie wybrano stacji\n";
       return;
     }
     Bicycle *selected_bike =
         choose_bike(selected_station, "rent", text_color, border_color);
-    rent_bike(selected_station, selected_bike);
-  } else if (choice == 2) {
-    // Oddanie roweru na wybranej stacji
-    RentalStation *selected_station = choose_station("return", text_color, border_color);
-    if (!selected_station || selected_station->get_empty_spaces() == 0) {
-      std::cout << "Ta stacja jest pełna\n";
-      return;
-    }
-    Bicycle *selected_bike =
-        choose_bike(selected_station, "return", text_color, border_color);
     if (selected_bike != nullptr) {
       return_bike(selected_station, selected_bike, text_color);
     }
+  } else if (choice == 2) {
+    // Oddanie roweru na wybranej stacji
+    RentalStation *selected_station = choose_station("return", text_color, border_color);
+    if (selected_station == nullptr) { return; }
+    if (!selected_station || selected_station->get_empty_spaces() == 0) {
+    std::cout << "Ta stacja jest pełna\n";
+    return;
+    }
+    Bicycle *selected_bike =
+    choose_bike(selected_station, "return", text_color, border_color);
+    if (selected_bike != nullptr) {
+      return_bike(selected_station, selected_bike, text_color);
+    }
+
   } else if (choice == 3) {
     // Wyświetlenie salda
     print_char('=', 100, true, border_color, true);
@@ -190,7 +193,7 @@ RentalStation *UserInterface::choose_station(std::string mode, std::string text_
     if (choice > counter || choice <= 0) {
       std::cout << std::endl
                 << get_color_code(true, "red")
-                << "Nie ma takiego punktu wypożyczenia! :(\n";
+                << "Nie ma takiego punktu wypożyczenia! :(";
     } else {
       RentalStation *selected_station = station_data[choice - 1];
       print_char('=', 100, true, border_color, true);

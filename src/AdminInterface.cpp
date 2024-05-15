@@ -58,17 +58,19 @@ void AdminInterface::redirect_from_starting_menu(std::string text_color,
     double x = get_user_double_input("Podaj współrzędną x");
     double y = get_user_double_input("Podaj współrzędną y");
     int capacity = get_user_int_input("Podaj pojemność");
-    int empty_spaces = get_user_int_input("Podaj ilość wolnych miejsc");
 
     std::unique_ptr<RentalStation> new_station =
-        std::make_unique<RentalStation>(name, x, y, capacity, empty_spaces);
+        std::make_unique<RentalStation>(name, x, y, capacity, capacity);
     station_data.add(std::move(new_station));
+    station_data.save();
   } else if (choice == 2) {
     // add bike
     std::string name = get_user_str_input("Podaj nazwę roweru");
     double price = get_user_double_input("Podaj cenę wypożyczenia (za dzień)");
     RentalStation *selected_station = choose_station(text_color, border_color);
-
+    if (selected_station == nullptr) {
+      return;
+    }
     std::unique_ptr<Bicycle> new_bike = std::make_unique<Bicycle>(
         name, price, selected_station->get_id(), true);
     bikes_data.add(std::move(new_bike));
@@ -83,7 +85,13 @@ void AdminInterface::redirect_from_starting_menu(std::string text_color,
         continue;
 
       User *user = users_data.find_by_id(rental->get_user());
+      if (user == nullptr) {
+        return;
+      }
       Bicycle *bike = bikes_data.find_by_id(rental->get_bicycle());
+      if (bike == nullptr) {
+        return;
+      }
 
       user->set_balance(user->get_balance() - bike->get_price());
       if (user->get_balance() < 0) {
@@ -167,7 +175,6 @@ RentalStation *AdminInterface::choose_station(std::string text_color,
   for (auto &station : station_data) {
     int bikes_on_station =
         station->get_capacity() - station->get_empty_spaces();
-    if (bikes_on_station >= 1) {
       std::cout << get_color_code(true, text_color);
       counter++;
       std::cout << "   " << counter << "> STACJA: " << station->get_name()
@@ -175,7 +182,6 @@ RentalStation *AdminInterface::choose_station(std::string text_color,
                 << " | lokalizacja: x=" << station->get_x()
                 << ", y=" << station->get_y()
                 << " | ilość rowerów: " << bikes_on_station << std::endl;
-    }
   }
 
   if (counter > 0) {
