@@ -51,21 +51,38 @@ Klasa `Model` jest bazową klasą utrzymywaną w bazie danych, wszystkie klasy w
 
 Autor: **Michał Pędziwiatr**
 
-Zadaniem klasy 'BaseInterface' jest stworzenie solidnych fundamentów pod dziedziczące po niej inne klasy tworzące interfejs. Jej funkcjonalność opiera się na formatowaniu oraz odpowiednim wyświetlaniu znaków, oraz pobierania danych od użytkownika.
+Zadaniem klasy 'BaseInterface' jest stworzenie solidnych fundamentów pod dziedziczące po niej inne klasy tworzące interfejs. Jej funkcjonalność opiera się na formatowaniu i odpowiednim wyświetlaniu znaków w terminalu, oraz pobierania danych od użytkownika.
 
 ### Funkcje
-- `void print_char(char printed_char, const int char_count, bool new_lines = false, std::string color = "none", bool bold = false, int time=0) const` :
+-   `virtual void run() = 0`,
+    `virtual void exit() = 0`:
+    Funkcje wirtualne służące do uruchomienia oraz zakończenia działania pętli interfejsu.
+-   `void print_char(char printed_char, const int char_count, bool new_lines = false, std::string color = "none", bool bold = false, int time=0) const` :
     Pozwala na szybkie oraz wygodne zwrócenie w konsoli ciągu znaków. Służy głównie do tworzenia ramek, oraz pustych obszarów interfejsu.
-- `void print_options(const std::vector<std::string> options, int width=50, std::string text_color = "yellow") const` :
-     Umożliwia wygodne wyświetlenie odpowiednio sformatowanych opcji do wyboru dla użytkownika.
-- `int get_user_int_input(std::string guide="") const` :
-    Pobiera od użytkownika dane typu int.
-- `std::string get_user_str_input(std::string guide="") const` :
-    Pobiera od użytkownika dane typu string.
-- `std::string get_color_code(bool bold=false, const std::string color="reset") const` :
-    Formatuje tekst by nadać mu odpowiedni kolor.
-- `bool is_proper_word(const std::string string) const` :
-    Sprawdza poprawność podanego ciągu znaków.
+-   `void print_options(const std::vector<std::string> options, int width=50, std::string text_color = "yellow") const` :
+    Umożliwia wygodne wyświetlenie odpowiednio sformatowanych opcji do wyboru dla użytkownika.
+-   `int get_user_int_input(std::string guide="") const`,
+    `std::string get_user_str_input(std::string guide="") const`,
+    `float get_user_float_input(std::string guide="") const`,
+    `double get_user_double_input(std::string guide="") const`:
+    Funkcje pobierające i sprawdzające poprawność typu podanych przez użytkownika danych.
+-   `void set_users_data(Database<User> & new_users_data)`,
+    `void set_bikes_data(Database<Bicycle> &new_bikes_data)`,
+    `void set_admins_data(Database<User> & new_admin_data)`,
+    `void set_station_data(Database<RentalStation> & new_station_data)`,
+    `void set_rentals_data(Database<Rent> & new_rentals)`,
+    `void set_user(User *user)`:
+    Settery odpowiednich obiektów klasy Database.
+-   `std::string get_color_code(bool bold=false, const std::string color="reset") const` :
+    Formatuje tekst nadając mu odpowiedni kolor i ewentualne pogrubienie.
+-   `bool is_proper_word(const std::string string) const` :
+    Sprawdza czy podany ciąg znaków jest prawidłowym słowem (czyli czy zawiera w sobie jedynie litery).
+-    `bool login()`:
+    Funkcja służąca do zalogowania, zwraca wartość zależną od tego czy użytkownik jest administratorem czy klientem.
+-   `User *get_user()`:
+    Getter zwracający wskaźnik na zalogowanego użytkownika.
+-   `save_date()`:
+    Funkcja nadpisująca obecną datę.
 
 ## Klasa UserInterface
 
@@ -110,5 +127,5 @@ Klasa 'RentalStation' dziedziczy po klasie 'Model' oraz reprezentuje stację wyp
 - `std::string str()` : Zwraca std::string z atrybutami stacji oddzielonymi przecinkami.
 - `std::vector<std::string> get_attributes() const` : Zwraca atrybuty, po których można wyszukiwać.
 - `bool check_query(const std::map<std::string, std::string> &query)` : Sprawdza, czy stacja spełnia zapytanie określone przez użytkownika.
-- `void set_xyz(const xyz &xyz)` : Ustawia wybrany atrybut. 
+- `void set_xyz(const xyz &xyz)` : Ustawia wybrany atrybut.
 - `xyz get_xyz() const` : Zwraca wybrany atrybut.

@@ -39,11 +39,13 @@ public:
                              const std::string color = "reset") const;
   bool is_proper_word(const std::string string) const;
 
+
+
   // Settery
   void set_users_data(Database<User> &new_users_data);
   void set_bikes_data(Database<Bicycle> &new_bikes_data);
-  void set_admins_data(Database<User> &new_bikes_data);
-  void set_station_data(Database<RentalStation> &new_bikes_data);
+  void set_admins_data(Database<User> &new_admin_data);
+  void set_station_data(Database<RentalStation> &new_station_data);
   void set_rentals_data(Database<Rent> &new_rentals);
 
   // returns is_admin
