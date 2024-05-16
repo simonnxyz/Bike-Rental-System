@@ -35,13 +35,13 @@ void AdminInterface::print_starting_menu(int width, std::string text_color,
   std::string option_1 = "1: >Dodaj punkt wypożyczenia<";
   std::string option_2 = "2: >Dodaj rower<";
   std::string option_3 = "3: >Medytuj przez 24h<";
-  std::string option_7 = "7: >Wyjdź<";
+  std::string option_4 = "4: >Wyjdź<";
 
   std::vector<std::string> options;
   options.push_back(option_1);
   options.push_back(option_2);
   options.push_back(option_3);
-  options.push_back(option_7);
+  options.push_back(option_4);
 
   print_options(options, width, text_color);
 
