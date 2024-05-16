@@ -124,10 +124,6 @@ Klasa `UserInterface` to klasa dziedzicząca po `BaseInterface`, której zadanie
 -   `void print_exit() const` :
     Wyświetla tekst pożegnalny.
 
-
-
-
-
 ## Klasa Bicycle
 
 Autor: **Kacper Siemionek**
@@ -159,3 +155,28 @@ Klasa `RentalStation` dziedziczy po klasie `Model` oraz reprezentuje stację wyp
 - `bool check_query(const std::map<std::string, std::string> &query)` : Sprawdza, czy stacja spełnia zapytanie określone przez użytkownika.
 - `void set_xyz(const xyz &xyz)` : Ustawia wybrany atrybut.
 - `xyz get_xyz() const` : Zwraca wybrany atrybut.
+
+## Klasa Rent
+
+Autor: **Wojciech Zieziula**
+
+Klasa `Rent` dziedziczy po klasie `Model`. Jej zadaniem jest reprezentacja pojedynczego wypożyczenia roweru ze stacji. Zawiera datę wypożyczenia, ID użytkownika wypożyczającego, ID wypożyczanego roweru oraz informację o tym, czy wypożyczenie zostało zakończone.
+
+### Funkcje
+
+- ``Rent(const std::string &date, const std::string &user_id, const std::string &bicycle_id)` : Konstruktor tworzący nowy obiekt reprezentujący wypożyczenie o podanych argumentach.
+- `void load(const std::string &data)` : Wczytuje dane wypożyczenia z podanego obiektu std::string.
+- `std::string str()` : Zwraca reprezentację obiektu jakos std::string. Zwrócony ciąg znaków może zostać użyty w funkcji `load` w celu wczytania danych.
+- `std::vector<std::string> get_attributes()` : Zwraca atrybuty, po których można wyszukiwać.
+- `bool check_query(const std::map<std::string, std::string> &query)` : Sprawdza, czy wypożyczenie spełnia zapytanie określone przez użytkownika.
+- `void set_attribute(const class &object)` : Ustawia wybrany atrybut.
+- `attribute_type get_attribute() const` : Zwraca wybrany atrybut.
+
+
+## Klasa AdminInterface
+
+## Klasa Date
+
+## Klasa DragonBicycle??
+
+## Klasa User
