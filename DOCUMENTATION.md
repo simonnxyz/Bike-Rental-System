@@ -51,7 +51,7 @@ Klasa `Model` jest bazową klasą utrzymywaną w bazie danych, wszystkie klasy w
 
 Autor: **Michał Pędziwiatr**
 
-Zadaniem klasy 'BaseInterface' jest stworzenie solidnych fundamentów pod dziedziczące po niej inne klasy tworzące interfejs. Jej funkcjonalność opiera się na formatowaniu i odpowiednim wyświetlaniu znaków w terminalu, oraz pobierania danych od użytkownika.
+Zadaniem klasy `BaseInterface` jest stworzenie solidnych fundamentów pod dziedziczące po niej inne klasy tworzące interfejs. Jej funkcjonalność opiera się na formatowaniu i odpowiednim wyświetlaniu znaków w terminalu, oraz pobierania danych od użytkownika.
 
 ### Funkcje
 -   `virtual void run() = 0`,
@@ -88,7 +88,7 @@ Zadaniem klasy 'BaseInterface' jest stworzenie solidnych fundamentów pod dziedz
 
 Autor: **Michał Pędziwiatr**
 
-Klasa 'UserInterface' to klasa dziedzicząca po 'BaseInterface', której zadaniem jest stworzenie przejrzystego i funkcjonalnego interfejsu dla użytkownika programu.
+Klasa `UserInterface` to klasa dziedzicząca po `BaseInterface`, której zadaniem jest stworzenie przejrzystego i funkcjonalnego interfejsu dla użytkownika programu.
 
 ### Funkcje
 -   `void run() override`,
@@ -100,28 +100,28 @@ Klasa 'UserInterface' to klasa dziedzicząca po 'BaseInterface', której zadanie
     Wyświetla menu startowe interfejsu użytkownika.
 -   `void redirect_from_starting_menu(std::string text_color= "cyan", std::string border_color="blue") const` :
     Pobiera oraz interpretuje wybór użytkownika, odpowiednio przekierowywując go do dalszych funkcji.
--   `show_balance(std::string text_color="cyan")' :
+-   `show_balance(std::string text_color="cyan")` :
     Wyświetla dostępne saldo użytkownika.
--   'void show_user_info(std::string text_color= "cyan")' :
+-   `void show_user_info(std::string text_color= "cyan")` :
     Wyświetla dane o zalogowanym użytkowniku.
--   'void show_history(std::string text_color)' :
+-   `void show_history(std::string text_color)` :
     Wyświetla historię wypożyczeń zalogowanego użytkownika.
--   'std::vector<Bicycle*> list_available_bikes(std::string selected_station_id,
-                                    std::string text_color="cyan")' :
+-   `std::vector<Bicycle*> list_available_bikes(std::string selected_station_id,
+                                    std::string text_color="cyan")` :
     Zwraca wektor wskaźników do każdego dostępnego roweru na danej stacji.
--   'std::vector<Bicycle*> list_rented_bikes(std::string text_color="cyan")' :
+-   `std::vector<Bicycle*> list_rented_bikes(std::string text_color="cyan")` :
     Zwaraca wektor wskaźników do każdego roweru, wypożyczonego obecnie przez zalogowanego użytkownika.
--   'void add_balance(std::string text_color="cyan")'
+-   `void add_balance(std::string text_color="cyan")`
     Funkcja służąca do wpłaty podanej przez użytkownika kwoty na jego konto.
--   'RentalStation* choose_station(std::string mode="rent", std::string text_color="cyan", std::string border_color = "blue")' :
+-   `RentalStation* choose_station(std::string mode="rent", std::string text_color="cyan", std::string border_color = "blue")` :
     Pozwala użytkownikowi wybrać jedną z wyświetlanych stacji.
--   'Bicycle* choose_bike(RentalStation* selected_station, std::string mode="rent", std::string text_color="cyan", std::string border_color="blue")' :
+-   `Bicycle* choose_bike(RentalStation* selected_station, std::string mode="rent", std::string text_color="cyan", std::string border_color="blue")` :
     Pozwala użytkownikowi wybrać jeden z wyświetlonych rowerów na danej stacji.
--   'void rent_bike(RentalStation* selected_station, Bicycle *selected_bike, std::string text_color= "cyan")' :
+-   `void rent_bike(RentalStation* selected_station, Bicycle *selected_bike, std::string text_color= "cyan")` :
     Umożliwia wypożyczenie roweru przez użytkownika.
--   'void return_bike(RentalStation* selected_station, Bicycle *selected_bike, std::string text_color= "cyan")' :
+-   `void return_bike(RentalStation* selected_station, Bicycle *selected_bike, std::string text_color= "cyan")` :
     Umożliwia zwrot wypożyczonego przez użytkownika roweru.
--   'void print_exit() const' :
+-   `void print_exit() const` :
     Wyświetla tekst pożegnalny.
 
 
@@ -132,7 +132,7 @@ Klasa 'UserInterface' to klasa dziedzicząca po 'BaseInterface', której zadanie
 
 Autor: **Kacper Siemionek**
 
-Klasa 'Bicycle' dziedziczy po klasie 'Model' oraz reprezentuje rower w wypożyczalni. Zawiera nazwę, cenę związaną z wypożyczeniem roweru, ID stacji, w której obecnie się znajduje oraz znacznik dostępności. Umożliwia swobodną kontrolę nad obiektem roweru, zapis i odczyt z std::string.
+Klasa `Bicycle` dziedziczy po klasie `Model` oraz reprezentuje rower w wypożyczalni. Zawiera nazwę, cenę związaną z wypożyczeniem roweru, ID stacji, w której obecnie się znajduje oraz znacznik dostępności. Umożliwia swobodną kontrolę nad obiektem roweru, zapis i odczyt z std::string.
 
 ## Funkcje
 
@@ -148,7 +148,7 @@ Klasa 'Bicycle' dziedziczy po klasie 'Model' oraz reprezentuje rower w wypożycz
 
 Autor: **Kacper Siemionek**
 
-Klasa 'RentalStation' dziedziczy po klasie 'Model' oraz reprezentuje stację wypożyczeń rowerów. Zawiera nazwę, współrzędne, pojemność oraz ilość wolnych miejsc na rowery. Umożliwia swobodną kontrolę nad obiektem stacji, zapis i odczyt z std::string.
+Klasa `RentalStation` dziedziczy po klasie `Model` oraz reprezentuje stację wypożyczeń rowerów. Zawiera nazwę, współrzędne, pojemność oraz ilość wolnych miejsc na rowery. Umożliwia swobodną kontrolę nad obiektem stacji, zapis i odczyt z std::string.
 
 ## Funkcje
 
