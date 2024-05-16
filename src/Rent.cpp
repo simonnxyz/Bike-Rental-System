@@ -62,7 +62,7 @@ void Rent::set_user(const std::string &user_id) { this->user_id = user_id; }
 void Rent::set_bicycle(const std::string &bicycle_id) {
   this->bicycle_id = bicycle_id;
 }
-void Rent::set_has_ended(bool new_has_ended) {
+void Rent::set_has_ended(const bool &new_has_ended) {
   this->has_ended = new_has_ended;
 }
 

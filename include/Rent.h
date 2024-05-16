@@ -20,7 +20,7 @@ public:
   void set_date(const std::string &date);
   void set_user(const std::string &user_id);
   void set_bicycle(const std::string &bicycle_id);
-  void set_has_ended(bool);
+  void set_has_ended(const bool &new_has_ended);
 
   // Getters
   std::string get_date() const;
