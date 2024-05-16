@@ -206,7 +206,8 @@ Klasa `User` dziedziczy po klasie `Model` oraz reprezentuje użytkownika. Zawier
 
 ### Funkcje
 
-- `User(const std::string &user_name, const std::string &user_email, const std::string &password, const double &balance = 0.00)` : Konstruktor tworzący nowy obiekt reprezentujący użytkownika.
+- `User(const std::string &user_name, const std::string &user_email, const std::string &password, const double &balance)` : Konstruktor tworzący nowy obiekt reprezentujący użytkownika.
+- `User(const std::string &user_name, const std::string &user_email, const std::string &password)`: Konstruktor tworzący nowy obiekt reprezentujący użytkownika. Stan konta jest ustawiany na 0.00.
 - `void load(const std::string &data)` : Wczytuje dane użytkownika z przekazanego obiektu std::string.
 - `std::string str()` : Zwraca reprezentację obiektu jako std::string. Zwrócony ciąg znaków może zostać użyty w funkcji `load` w celu wczytania danych.
 - `std::vector<std::string> get_attributes()` : Zwraca atrybuty, po których można wyszukiwać.
