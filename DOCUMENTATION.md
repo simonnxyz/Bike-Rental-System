@@ -217,3 +217,19 @@ Klasa `User` dziedziczy po klasie `Model` oraz reprezentuje użytkownika. Zawier
 - `bool compare_password(const std::string &password)` : Zwraca true, jeśli hasło przekazane jako argument jest takie samo jak hasło użytkownika. W przeciwnym wypadku zwraca false.
 
 ## Klasa AdminInterface
+
+Autor: **Michał Mizia**
+
+Klasa `AdminInterface` dziedziczy po `BaseInterface`. Jej zadaniem jest stworzenie przejrzystego i funkcjonalnego interfejsu dla administratora. Przechowuje zmienną informującą o tym, czy interfejs jest aktualnie uruchomiony.
+
+### Funkcje
+- `void run()` : Uruchamia interfejs
+- `void exit()`: Wyświetla wiadomość pożegnalną i wyłącza interfejs
+- `void print_starting_text(int width, std::string text_color, std::string border_color) const` : Wyświetla tekst powitalny w panelu.
+- `void print_starting_menu(int width, std::string text_color, std::string border_color) const` : Wyświetla menu startowe.
+- `RentalStation *choose_station(std::string text_color = "cyan", std::string border_color = "blue")` : Wyświetla menu dotyczące wyboru stacji oraz wczytuje niezbędne dane. Zwracany jest wskaźnik na wybraną stację.
+- `Bicycle *choose_bike(RentalStation *selected_station, std::string mode = "rent", std::string text_color = "cyan", std::string border_color = "blue")`: Wyświetla menu dotyczące wyboru roweru oraz wczytuje niezbędne dane. Zwracany jest wskaźnik na wybrany rower.
+- `std::vector<Bicycle *> list_available_bikes(std::string selected_station_id, std::string text_color = "cyan")` : Wyświetla wszystkie dostępne rowery w danej stacji wypożyczeń.
+- `std::vector<Bicycle *> list_rented_bikes(std::string text_color = "cyan")` : Wyświetla wszystkie wypożyczone rowery.
+- `void print_exit() const` : Wyświetla wiadomość pożegnalną.
+- `void redirect_from_starting_menu(std::string text_color, std::string border_color)` : Pyta administratora o wybór opcji, a następnie, w zależności od wyboru, przekierowuje do kolejnych opcji dialogowych i wczytuje odpowiednie dane.
