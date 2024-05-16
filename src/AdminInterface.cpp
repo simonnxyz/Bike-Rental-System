@@ -19,9 +19,13 @@ void AdminInterface::print_starting_text(int width, std::string text_color,
     width = 100;
   print_char('=', width, true, border_color, true, 10);
   std::string title_text = "=== PANEL ADMINA ROWEROWNI ===\n\n";
+  std::string date_str = current_date.str();
   std::cout << std::endl;
   print_char(' ', (width - title_text.length()) / 2, false);
   std::cout << get_color_code(true, text_color) << title_text
+            << get_color_code(false, "reset") << std::endl;
+  print_char(' ', (width - date_str.length() - 2) / 2, false);
+  std::cout << get_color_code(true, text_color) << date_str
             << get_color_code(false, "reset");
   std::cout << std::endl << std::endl << get_color_code(false, "reset");
 }
@@ -85,19 +89,28 @@ void AdminInterface::redirect_from_starting_menu(std::string text_color,
         continue;
 
       User *user = users_data.find_by_id(rental->get_user());
-      if (user == nullptr) {
-        return;
-      }
+      if (user == nullptr)
+        continue;
+
       Bicycle *bike = bikes_data.find_by_id(rental->get_bicycle());
-      if (bike == nullptr) {
-        return;
-      }
+      if (bike == nullptr)
+        continue;
 
       user->set_balance(user->get_balance() - bike->get_price());
-      if (user->get_balance() < 0) {
-        user->set_balance(0);
-        // return bike
-        bike->set_availability(true);
+      if (user->get_balance() > 0)
+        continue;
+
+      // if user doesnt have any more money
+      user->set_balance(0);
+      // return bike
+      bike->set_availability(true);
+      // choose first station
+      for (auto &station : station_data) {
+        if (station->get_empty_spaces() != station->get_capacity()) {
+          station->set_empty_spaces(station->get_empty_spaces() + 1);
+          bike->set_station(station->get_id());
+          break;
+        }
       }
     }
     std::cout << "Medytacja zakończona\n";
@@ -175,13 +188,13 @@ RentalStation *AdminInterface::choose_station(std::string text_color,
   for (auto &station : station_data) {
     int bikes_on_station =
         station->get_capacity() - station->get_empty_spaces();
-      std::cout << get_color_code(true, text_color);
-      counter++;
-      std::cout << "   " << counter << "> STACJA: " << station->get_name()
-                << get_color_code(false, text_color)
-                << " | lokalizacja: x=" << station->get_x()
-                << ", y=" << station->get_y()
-                << " | ilość rowerów: " << bikes_on_station << std::endl;
+    std::cout << get_color_code(true, text_color);
+    counter++;
+    std::cout << "   " << counter << "> STACJA: " << station->get_name()
+              << get_color_code(false, text_color)
+              << " | lokalizacja: x=" << station->get_x()
+              << ", y=" << station->get_y()
+              << " | ilość rowerów: " << bikes_on_station << std::endl;
   }
 
   if (counter > 0) {
