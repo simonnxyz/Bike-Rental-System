@@ -8,9 +8,7 @@ public:
   // constructors
   User() = default;
   User(const std::string &user_name, const std::string &user_email,
-       const std::string &password, const double &balance);
-  User(const std::string &user_name, const std::string &user_email,
-       const std::string &password);
+       const std::string &password, const double &balance = 0.00);
 
   // virtuals
   virtual void load(const std::string &data) override;

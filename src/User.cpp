@@ -6,23 +6,10 @@
 
 
 User::User(const std::string &user_name, const std::string &user_email,
-           const std::string &password, const double &balance) {
+           const std::string &password, const double &balance = 0.00) {
   set_email(user_email);
   set_name(user_name);
   set_balance(balance);
-
-  SHA256 sha;
-  sha.update(password);
-  std::array<uint8_t, 32> digest = sha.digest();
-
-  pwd_hash = SHA256::toString(digest);
-}
-
-User::User(const std::string &user_name, const std::string &user_email,
-           const std::string &password) {
-  set_email(user_email);
-  set_name(user_name);
-  set_balance(0.00);
 
   SHA256 sha;
   sha.update(password);
