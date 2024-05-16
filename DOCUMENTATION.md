@@ -91,12 +91,42 @@ Autor: **Michał Pędziwiatr**
 Klasa 'UserInterface' to klasa dziedzicząca po 'BaseInterface', której zadaniem jest stworzenie przejrzystego i funkcjonalnego interfejsu dla użytkownika programu.
 
 ### Funkcje
+-   `void run() override`,
+    `void exit() override` :
+    Nadpisanie metod wirtualnych klasy BaseInterface, służących do uruchomienia i zatrzymania pętli działania interfejsu.
 -  `void print_starting_text(int width=100, std::string text_color = "cyan", std::string border_color="blue") const` :
     Wyświetla tytułowy tekst programu.
-- `void print_starting_menu(int width=100, std::string text_color = "cyan", std::string border_color="blue") const` :
+-   `void print_starting_menu(int width=100, std::string text_color = "cyan", std::string border_color="blue") const` :
     Wyświetla menu startowe interfejsu użytkownika.
-- `void redirect_from_starting_menu(std::string text_color= "cyan", std::string border_color="blue") const` :
+-   `void redirect_from_starting_menu(std::string text_color= "cyan", std::string border_color="blue") const` :
     Pobiera oraz interpretuje wybór użytkownika, odpowiednio przekierowywując go do dalszych funkcji.
+-   `show_balance(std::string text_color="cyan")' :
+    Wyświetla dostępne saldo użytkownika.
+-   'void show_user_info(std::string text_color= "cyan")' :
+    Wyświetla dane o zalogowanym użytkowniku.
+-   'void show_history(std::string text_color)' :
+    Wyświetla historię wypożyczeń zalogowanego użytkownika.
+-   'std::vector<Bicycle*> list_available_bikes(std::string selected_station_id,
+                                    std::string text_color="cyan")' :
+    Zwraca wektor wskaźników do każdego dostępnego roweru na danej stacji.
+-   'std::vector<Bicycle*> list_rented_bikes(std::string text_color="cyan")' :
+    Zwaraca wektor wskaźników do każdego roweru, wypożyczonego obecnie przez zalogowanego użytkownika.
+-   'void add_balance(std::string text_color="cyan")'
+    Funkcja służąca do wpłaty podanej przez użytkownika kwoty na jego konto.
+-   'RentalStation* choose_station(std::string mode="rent", std::string text_color="cyan", std::string border_color = "blue")' :
+    Pozwala użytkownikowi wybrać jedną z wyświetlanych stacji.
+-   'Bicycle* choose_bike(RentalStation* selected_station, std::string mode="rent", std::string text_color="cyan", std::string border_color="blue")' :
+    Pozwala użytkownikowi wybrać jeden z wyświetlonych rowerów na danej stacji.
+-   'void rent_bike(RentalStation* selected_station, Bicycle *selected_bike, std::string text_color= "cyan")' :
+    Umożliwia wypożyczenie roweru przez użytkownika.
+-   'void return_bike(RentalStation* selected_station, Bicycle *selected_bike, std::string text_color= "cyan")' :
+    Umożliwia zwrot wypożyczonego przez użytkownika roweru.
+-   'void print_exit() const' :
+    Wyświetla tekst pożegnalny.
+
+
+
+
 
 ## Klasa Bicycle
 
