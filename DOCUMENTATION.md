@@ -130,14 +130,6 @@ Autor: **Kacper Siemionek**
 
 Klasa `Bicycle` dziedziczy po klasie `Model` oraz reprezentuje rower w wypożyczalni. Zawiera nazwę, cenę związaną z wypożyczeniem roweru, ID stacji, w której obecnie się znajduje oraz znacznik dostępności. Umożliwia swobodną kontrolę nad obiektem roweru, zapis i odczyt z std::string.
 
-## Klasa DragonBicycle
-
-Autor: **Nieznany**
-
-### Funkcje
-
-- brum
-
 ## Funkcje
 
 - `Bicycle(const std::string &name, const double &price, const std::string &station_id, const bool &is_available)` : Konstruktor tworzący nowy obiekt roweru z podanymi atrybutami.
@@ -147,6 +139,14 @@ Autor: **Nieznany**
 - `bool check_query(const std::map<std::string, std::string> &query) const` : Sprawdza, czy rower spełnia zapytanie określone przez użytkownika.
 - `void set_xxx(const std::string &xxx)` : Ustawia wybrany atrybut.
 - `??? get_xxx() const` : Zwraca wybrany atrybut.
+
+## Klasa DragonBicycle
+
+Autor: **Nieznany**
+
+### Funkcje
+
+- brum
 
 ## Klasa RentalStation
 
@@ -179,7 +179,6 @@ Klasa `Rent` dziedziczy po klasie `Model`. Jej zadaniem jest reprezentacja pojed
 - `bool check_query(const std::map<std::string, std::string> &query)` : Sprawdza, czy wypożyczenie spełnia zapytanie określone przez użytkownika.
 - `void set_attribute(const type &object)` : Ustawia wybrany atrybut.
 - `attribute_type get_attribute() const` : Zwraca wybrany atrybut.
-
 
 ## Klasa Date
 
