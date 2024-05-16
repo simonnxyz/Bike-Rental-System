@@ -30,9 +30,9 @@ int main() {
       interface = new AdminInterface();
     }
 
-    // when the interface sets its user_data it is moved into it because users
-    // is a vector of unique_ptr because of that we need to reload the data from
-    // the file in case the user registered which changed our database
+    // when the interface sets its user_data it's moved into it because users
+    // is a vector of unique_ptr because of that we need to reload the
+    // data from the file in case the user registered which changed our database
     users.load();
     User *user = users.find_by_id(user_id);
     if (user == nullptr) {

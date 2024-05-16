@@ -104,16 +104,17 @@ void AdminInterface::redirect_from_starting_menu(std::string text_color,
       user->set_balance(0);
       // return bike
       bike->set_availability(true);
+      rental->set_has_ended(true);
       // choose first station
       for (auto &station : station_data) {
-        if (station->get_empty_spaces() != station->get_capacity()) {
-          station->set_empty_spaces(station->get_empty_spaces() + 1);
+        if (station->get_empty_spaces() != 0) {
+          station->set_empty_spaces(station->get_empty_spaces() - 1);
           bike->set_station(station->get_id());
           break;
         }
       }
     }
-    std::cout << "Medytacja zakończona\n";
+    std::cout << "Medytacja zakończona (uzupełniono misktury)\n";
   } else if (choice == 7) {
     // Wyjście
     exit();
