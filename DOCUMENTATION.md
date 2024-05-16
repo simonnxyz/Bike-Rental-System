@@ -130,6 +130,14 @@ Autor: **Kacper Siemionek**
 
 Klasa `Bicycle` dziedziczy po klasie `Model` oraz reprezentuje rower w wypożyczalni. Zawiera nazwę, cenę związaną z wypożyczeniem roweru, ID stacji, w której obecnie się znajduje oraz znacznik dostępności. Umożliwia swobodną kontrolę nad obiektem roweru, zapis i odczyt z std::string.
 
+## Klasa DragonBicycle
+
+Autor: **Nieznany**
+
+### Funkcje
+
+- brum
+
 ## Funkcje
 
 - `Bicycle(const std::string &name, const double &price, const std::string &station_id, const bool &is_available)` : Konstruktor tworzący nowy obiekt roweru z podanymi atrybutami.
@@ -166,7 +174,7 @@ Klasa `Rent` dziedziczy po klasie `Model`. Jej zadaniem jest reprezentacja pojed
 
 - `Rent(const std::string &date, const std::string &user_id, const std::string &bicycle_id)` : Konstruktor tworzący nowy obiekt reprezentujący wypożyczenie o podanych argumentach.
 - `void load(const std::string &data)` : Wczytuje dane wypożyczenia z podanego obiektu std::string.
-- `std::string str()` : Zwraca reprezentację obiektu jakos std::string. Zwrócony ciąg znaków może zostać użyty w funkcji `load` w celu wczytania danych.
+- `std::string str()` : Zwraca reprezentację obiektu jako std::string. Zwrócony ciąg znaków może zostać użyty w funkcji `load` w celu wczytania danych.
 - `std::vector<std::string> get_attributes()` : Zwraca atrybuty, po których można wyszukiwać.
 - `bool check_query(const std::map<std::string, std::string> &query)` : Sprawdza, czy wypożyczenie spełnia zapytanie określone przez użytkownika.
 - `void set_attribute(const type &object)` : Ustawia wybrany atrybut.
@@ -190,8 +198,21 @@ Klasa `Date` reprezentuję datę oraz umożliwia wykonywanie wszelkich operacji 
 - `static bool is_leap_year(const int &year)` : Zwraca true jeśli podany rok jest przestępny. W przeciwnym wypadku zwracana jest wartość false.
 - `std::string str() const` : Zwraca datę jako obiekt std::string.
 
-## Klasa AdminInterface
-
-## Klasa DragonBicycle??
-
 ## Klasa User
+
+Autor: **Michał Mizia**
+
+Klasa `User` dziedziczy po klasie `Model` oraz reprezentuje użytkownika. Zawiera imię, adres email, hasło oraz stan konta. Umożliwia swobodną kontrolę nad obiektem użytkownika - zapis do/odczyt z obiektu std::string, sprawdzenie zapytania. Ponadto klasa `User` hashuje hasło, co zapobiega odczytaniu go przez osoby niepożądane.
+
+### Funkcje
+
+- `User(const std::string &user_name, const std::string &user_email, const std::string &password, const double &balance = 0.00)` : Konstruktor tworzący nowy obiekt reprezentujący użytkownika.
+- `void load(const std::string &data)` : Wczytuje dane użytkownika z przekazanego obiektu std::string.
+- `std::string str()` : Zwraca reprezentację obiektu jako std::string. Zwrócony ciąg znaków może zostać użyty w funkcji `load` w celu wczytania danych.
+- `std::vector<std::string> get_attributes()` : Zwraca atrybuty, po których można wyszukiwać.
+- `bool check_query(const std::map<std::string, std::string> &query)` : Sprawdza, czy użytkownik spełnia określone zapytanie.
+- `void set_attribute(const type &object)` : Ustawia wybrany atrybut.
+- `attribute_type get_attribute() const` : Zwraca wybrany atrybut.
+- `bool compare_password(const std::string &password)` : Zwraca true, jeśli hasło przekazane jako argument jest takie samo jak hasło użytkownika. W przeciwnym wypadku zwraca false.
+
+## Klasa AdminInterface
