@@ -47,39 +47,39 @@ int main() {
 
   // RentalStation(const std::string &name, const double &x, const double &y,
   //               const int &capacity, const int &empty_spaces);
-  std::unique_ptr<RentalStation> station1 =
+  std::unique_ptr<RentalStation> centrum =
       std::make_unique<RentalStation>("Centrum", 52.2297, 21.0122, 100, 98);
-  std::unique_ptr<RentalStation> station2 =
+  std::unique_ptr<RentalStation> mokotow =
       std::make_unique<RentalStation>("Mokotow", 52.1934, 21.0458, 100, 98);
-  std::unique_ptr<RentalStation> station3 =
+  std::unique_ptr<RentalStation> praga =
       std::make_unique<RentalStation>("Praga", 52.2552, 21.0570, 100, 98);
-  std::unique_ptr<RentalStation> station4 =
+  std::unique_ptr<RentalStation> wola =
       std::make_unique<RentalStation>("Wola", 52.2323, 21.0067, 100, 99);
-  std::unique_ptr<RentalStation> station5 =
+  std::unique_ptr<RentalStation> ursynow =
       std::make_unique<RentalStation>("Ursynow", 52.1416, 21.0340, 100, 99);
-  std::unique_ptr<RentalStation> station6 =
+  std::unique_ptr<RentalStation> bemowo =
       std::make_unique<RentalStation>("Bemowo", 52.2388, 20.9136, 100, 99);
 
   // Bicycle(const std::string &name, const double &price,
   //         const std::string &station_id, const bool &is_available);
   std::unique_ptr<Bicycle> bike1 =
-      std::make_unique<Bicycle>("shimano turbo", 15, station1->get_id(), true);
+      std::make_unique<Bicycle>("shimano turbo", 15, centrum->get_id(), true);
   std::unique_ptr<Bicycle> bike2 =
-      std::make_unique<Bicycle>("speedster", 15, station2->get_id(), true);
+      std::make_unique<Bicycle>("speedster", 15, mokotow->get_id(), true);
   std::unique_ptr<Bicycle> bike3 = std::make_unique<Bicycle>(
-      "miejski pogromca v2", 10, station3->get_id(), true);
-  std::unique_ptr<Bicycle> bike4 = std::make_unique<Bicycle>(
-      "uliczny popylacz", 10, station4->get_id(), true);
+      "miejski pogromca v2", 10, praga->get_id(), true);
+  std::unique_ptr<Bicycle> bike4 =
+      std::make_unique<Bicycle>("uliczny popylacz", 10, wola->get_id(), true);
   std::unique_ptr<Bicycle> bike5 = std::make_unique<Bicycle>(
-      "terenowy wariacik", 10, station5->get_id(), true);
+      "terenowy wariacik", 10, ursynow->get_id(), true);
   std::unique_ptr<Bicycle> bike6 = std::make_unique<Bicycle>(
-      "szosowy mastermind", 10, station6->get_id(), true);
+      "szosowy mastermind", 10, bemowo->get_id(), true);
   std::unique_ptr<Bicycle> bike7 = std::make_unique<Bicycle>(
-      "cannondale ultra light", 10, station3->get_id(), true);
-  std::unique_ptr<Bicycle> bike8 = std::make_unique<Bicycle>(
-      "duch armstronga", 10, station1->get_id(), true);
+      "cannondale ultra light", 10, praga->get_id(), true);
+  std::unique_ptr<Bicycle> bike8 =
+      std::make_unique<Bicycle>("duch armstronga", 10, centrum->get_id(), true);
   std::unique_ptr<Bicycle> bike9 =
-      std::make_unique<Bicycle>("iamspeed", 10, station2->get_id(), true);
+      std::make_unique<Bicycle>("iamspeed", 10, mokotow->get_id(), true);
 
   // Add the data
   users.add(std::move(user1));
@@ -92,12 +92,12 @@ int main() {
   admins.add(std::move(admin3));
   admins.add(std::move(admin4));
 
-  stations.add(std::move(station1));
-  stations.add(std::move(station2));
-  stations.add(std::move(station3));
-  stations.add(std::move(station4));
-  stations.add(std::move(station5));
-  stations.add(std::move(station6));
+  stations.add(std::move(centrum));
+  stations.add(std::move(mokotow));
+  stations.add(std::move(praga));
+  stations.add(std::move(wola));
+  stations.add(std::move(ursynow));
+  stations.add(std::move(bemowo));
 
   bikes.add(std::move(bike1));
   bikes.add(std::move(bike2));

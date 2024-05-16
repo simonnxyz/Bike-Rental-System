@@ -179,10 +179,13 @@ RentalStation *UserInterface::choose_station(std::string mode,
   print_char('=', 100, true, border_color, true);
   std::cout << std::endl;
   int counter = 0;
+  std::vector<RentalStation *> valid_stations;
   for (auto &station : station_data) {
+
     int bikes_on_station =
         station->get_capacity() - station->get_empty_spaces();
-    if (((mode == "rent") && bikes_on_station >= 1) ||
+
+    if (((mode == "rent") && bikes_on_station > 0) ||
         ((mode == "return") && bikes_on_station < station->get_capacity())) {
       std::cout << get_color_code(true, text_color);
       counter++;
@@ -191,6 +194,7 @@ RentalStation *UserInterface::choose_station(std::string mode,
                 << " | lokalizacja: x=" << station->get_x()
                 << ", y=" << station->get_y()
                 << " | ilość rowerów: " << bikes_on_station << std::endl;
+      valid_stations.push_back(station.get());
     }
   }
 
@@ -205,7 +209,7 @@ RentalStation *UserInterface::choose_station(std::string mode,
                 << get_color_code(true, "red")
                 << "Nie ma takiego punktu wypożyczenia! :(";
     } else {
-      RentalStation *selected_station = station_data[choice - 1];
+      RentalStation *selected_station = valid_stations[choice - 1];
       print_char('=', 100, true, border_color, true);
       return selected_station;
     }
@@ -338,7 +342,7 @@ void UserInterface::rent_bike(RentalStation *selected_station,
         current_date.str(), get_user()->get_id(), selected_bike->get_id()));
     selected_bike->set_availability(false);
     selected_station->set_empty_spaces(
-        std::max(selected_station->get_empty_spaces() + 1,
+        std::min(selected_station->get_empty_spaces() + 1,
                  selected_station->get_capacity()));
     std::cout << get_color_code(false, "green")
               << "Wypożyczono rower: " << selected_bike->get_name()
