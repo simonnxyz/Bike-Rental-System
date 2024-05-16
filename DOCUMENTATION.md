@@ -164,18 +164,33 @@ Klasa `Rent` dziedziczy po klasie `Model`. Jej zadaniem jest reprezentacja pojed
 
 ### Funkcje
 
-- ``Rent(const std::string &date, const std::string &user_id, const std::string &bicycle_id)` : Konstruktor tworzący nowy obiekt reprezentujący wypożyczenie o podanych argumentach.
+- `Rent(const std::string &date, const std::string &user_id, const std::string &bicycle_id)` : Konstruktor tworzący nowy obiekt reprezentujący wypożyczenie o podanych argumentach.
 - `void load(const std::string &data)` : Wczytuje dane wypożyczenia z podanego obiektu std::string.
 - `std::string str()` : Zwraca reprezentację obiektu jakos std::string. Zwrócony ciąg znaków może zostać użyty w funkcji `load` w celu wczytania danych.
 - `std::vector<std::string> get_attributes()` : Zwraca atrybuty, po których można wyszukiwać.
 - `bool check_query(const std::map<std::string, std::string> &query)` : Sprawdza, czy wypożyczenie spełnia zapytanie określone przez użytkownika.
-- `void set_attribute(const class &object)` : Ustawia wybrany atrybut.
+- `void set_attribute(const type &object)` : Ustawia wybrany atrybut.
 - `attribute_type get_attribute() const` : Zwraca wybrany atrybut.
 
 
-## Klasa AdminInterface
-
 ## Klasa Date
+
+Autor:
+
+Klasa `Date` reprezentuję datę oraz umożliwia wykonywanie wszelkich operacji porównania pomiędzy dwoma obiektami tego typu. Zawiera pola reprezentujące dzień, miesiąc oraz rok.
+
+### Funkcje
+
+- `Date(const int &day, const int &month, const int &year)` : Konstruktor tworzący nowy obiekt reprezentujący datę. Kolejno dzień, miesiąc i rok reprezentowane są jako 3 liczby całkowite.
+- `Date(const std::string &date)` : Konstruktor tworzący nowy obiekt reprezentujący datę. W tym przypadku data jest odczytywana z obiektu std::string w formacie `00;00;0000`, gdzie `0` jest cyfrą, a `;` separatorem.
+- `void set_attribute(const type &object)` : Ustawia wybrany atrybut.
+- `type get_attribute() const` : Zwraca wybrany atrybut.
+- `static std::string month_name(const int &month)` : Zwraca nazwę podanego miesiąca jako obiekt std::string.
+- `static bool is_valid_date(const int &day, const int &month, const int &year)` : Zwraca true jeśli podana data jest prawidłowa. W przeciwnym wypadku zwracana jest wartość false.
+- `static bool is_leap_year(const int &year)` : Zwraca true jeśli podany rok jest przestępny. W przeciwnym wypadku zwracana jest wartość false.
+- `std::string str() const` : Zwraca datę jako obiekt std::string.
+
+## Klasa AdminInterface
 
 ## Klasa DragonBicycle??
 
