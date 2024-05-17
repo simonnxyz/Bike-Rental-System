@@ -1,9 +1,9 @@
-4762947b-48ee-49ea-a358-e9e60b7e6f4c,shimano turbo,15.00,df4038a1-cdf0-4e92-9b34-834be6ed4d31,0
-b6beece1-74dd-443b-a91c-f055c01e946b,speedster,15.00,df4038a1-cdf0-4e92-9b34-834be6ed4d31,1
-939228af-99e1-4bbf-92e3-db4984344a69,miejski pogromca v2,10.00,df4038a1-cdf0-4e92-9b34-834be6ed4d31,1
-5f169578-8810-41d4-9b93-1a66da1bf997,uliczny popylacz,10.00,73426ccb-711d-4673-a4c6-a7c27caa0bca,1
-06368c3f-86c1-4462-9948-d403a0941990,terenowy wariacik,10.00,61383fb5-42bf-47be-9d23-338247f867e1,1
-55ae2b1c-c387-4bd2-8df4-b61bbc03b950,szosowy mastermind,10.00,18681710-ac1a-4732-ba16-3ac835decde1,1
-6a086e48-bbab-45c4-aae3-c29cc121f4b7,cannondale ultra light,10.00,c344ae40-7a09-4ce2-82d7-4f855fd3cde1,1
-19468997-de38-4f48-a14f-946aea8c9dda,duch armstronga,10.00,df4038a1-cdf0-4e92-9b34-834be6ed4d31,1
-73a4a1e2-d9ab-400e-8c18-a039c4373c3c,iamspeed,10.00,bd62dc78-1e60-4cba-98ee-a0131d2b2e04,1
+7b954e21-6ef2-4736-944b-e44672a97038,shimano turbo,15.00,2e31cc92-67ba-47ed-baf4-53d6d58b301c,1
+a29534f8-63a4-4171-92f2-7c4f4de8e8c7,speedster,15.00,a32bb090-170f-4cc7-b6e2-c00126661f2f,1
+77d1be7f-f24f-4d2b-ba08-29b29c00cdde,miejski pogromca v2,10.00,db8e0c91-339f-42cc-91fe-250e387caaf9,1
+a0cfa0f4-8212-4017-a1ff-66ebce669daf,uliczny popylacz,10.00,169bf257-ad53-42db-afbc-dbaa7dbc656a,1
+34f7ff99-01bf-46de-85ad-374a368f86c4,terenowy wariacik,10.00,3ac4277d-6002-4216-864f-bf2e1cd814ee,1
+464bb37a-f457-4e8b-ac36-c41de1a906a5,szosowy mastermind,10.00,53e56332-594b-40f9-aaea-fe4e8a2f6b50,1
+9d79705f-8cd5-4208-be24-7777999382e8,cannondale ultra light,10.00,db8e0c91-339f-42cc-91fe-250e387caaf9,1
+ecc2d4e4-295d-44e8-a4cb-ecf8e8d4358d,duch armstronga,10.00,2e31cc92-67ba-47ed-baf4-53d6d58b301c,1
+d42a3bcd-8b44-4ad8-b474-8b44dd95573b,iamspeed,10.00,a32bb090-170f-4cc7-b6e2-c00126661f2f,1
