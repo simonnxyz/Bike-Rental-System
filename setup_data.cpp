@@ -48,17 +48,17 @@ int main() {
   // RentalStation(const std::string &name, const double &x, const double &y,
   //               const int &capacity, const int &empty_spaces);
   std::unique_ptr<RentalStation> centrum =
-      std::make_unique<RentalStation>("Centrum", 52.2297, 21.0122, 100, 98);
+      std::make_unique<RentalStation>("Centrum", 430, 375, 100, 98);
   std::unique_ptr<RentalStation> mokotow =
-      std::make_unique<RentalStation>("Mokotow", 52.1934, 21.0458, 100, 98);
+      std::make_unique<RentalStation>("Mokotow", 410, 500, 100, 98);
   std::unique_ptr<RentalStation> praga =
-      std::make_unique<RentalStation>("Praga", 52.2552, 21.0570, 100, 98);
+      std::make_unique<RentalStation>("Praga", 550, 325, 100, 98);
   std::unique_ptr<RentalStation> wola =
-      std::make_unique<RentalStation>("Wola", 52.2323, 21.0067, 100, 99);
+      std::make_unique<RentalStation>("Wola", 260, 350, 100, 99);
   std::unique_ptr<RentalStation> ursynow =
-      std::make_unique<RentalStation>("Ursynow", 52.1416, 21.0340, 100, 99);
+      std::make_unique<RentalStation>("Ursynow", 415, 725, 100, 99);
   std::unique_ptr<RentalStation> bemowo =
-      std::make_unique<RentalStation>("Bemowo", 52.2388, 20.9136, 100, 99);
+      std::make_unique<RentalStation>("Bemowo", 180, 325, 100, 99);
 
   // Bicycle(const std::string &name, const double &price,
   //         const std::string &station_id, const bool &is_available);

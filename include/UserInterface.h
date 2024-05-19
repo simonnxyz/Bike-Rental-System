@@ -19,6 +19,7 @@ public:
   void show_balance(std::string text_color="cyan");
   void show_user_info(std::string text_color= "cyan");
   void show_history(std::string text_color);
+  RentalStation* show_map();
 
   // Funkcje przetwarzające dane
   void add_balance(std::string text_color="cyan");

@@ -1,6 +1,8 @@
 cmake_minimum_required(VERSION 3.12)
 project(Rowerownia)
 
+find_package(SFML 2.5 COMPONENTS graphics REQUIRED)
+
 include_directories(include) # header files there
 
 add_library(sha256 include/SHA256.h src/SHA256.cpp)
@@ -109,3 +111,5 @@ target_link_libraries(
 
 include(GoogleTest)
 gtest_discover_tests(google_testing)
+
+target_link_libraries(main PRIVATE sfml-graphics)

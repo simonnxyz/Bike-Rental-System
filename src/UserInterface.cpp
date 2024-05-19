@@ -1,5 +1,6 @@
 #include "../include/UserInterface.h"
 #include <math.h>
+#include <SFML/Graphics.hpp>
 
 UserInterface::UserInterface(){};
 
@@ -37,7 +38,8 @@ void UserInterface::print_starting_menu(int width, std::string text_color,
   std::string option_4 = "4: >Doładuj środki<";
   std::string option_5 = "5: >Wyświetl informacje o koncie<";
   std::string option_6 = "6: >Wyświetl historię wypożyczeń<";
-  std::string option_7 = "7: >Wyjdź<";
+  std::string option_7 = "7: >Wybierz punkt z mapy<";
+  std::string option_8 = "8: >Wyjdź<";
 
   std::vector<std::string> options;
   options.push_back(option_1);
@@ -47,6 +49,7 @@ void UserInterface::print_starting_menu(int width, std::string text_color,
   options.push_back(option_5);
   options.push_back(option_6);
   options.push_back(option_7);
+  options.push_back(option_8);
 
   print_options(options, width, text_color);
 
@@ -108,6 +111,17 @@ void UserInterface::redirect_from_starting_menu(std::string text_color,
     show_history(text_color);
     std::cout << get_color_code();
   } else if (choice == 7) {
+        // Wyświetlanie mapy
+    RentalStation *selected_station = show_map();
+    if (selected_station == nullptr) {
+      return;
+    }
+    Bicycle *selected_bike =
+        choose_bike(selected_station, "rent", text_color, border_color);
+    if (selected_bike != nullptr) {
+      rent_bike(selected_station, selected_bike, text_color);
+    }
+  } else if (choice == 8) {
     // Wyjście
     exit();
   } else if (choice == 966 || choice == 1385 || choice == 1410 ||
@@ -364,4 +378,83 @@ void UserInterface::return_bike(RentalStation *selected_station,
   } else {
     std::cout << "Nie znaleziono wypożyczenia\n";
   }
+}
+
+RentalStation* UserInterface::show_map() {
+  sf::RenderWindow window(sf::VideoMode(870, 752), "Mapa stacji");
+
+  window.setVerticalSyncEnabled(false);
+
+  sf::Texture mapTexture;
+  mapTexture.loadFromFile("../mapa.jpg");
+
+  sf::Sprite mapSprite;
+  mapSprite.setTexture(mapTexture);
+
+  sf::Font font;
+  font.loadFromFile("../GothamMedium.ttf");
+  RentalStation *selected_station;
+  while (window.isOpen()) {
+    sf::Event event;
+    while (window.pollEvent(event)) {
+        if (event.type == sf::Event::Closed)
+            window.close();
+        else if (event.type == sf::Event::MouseButtonPressed) {
+            if (event.mouseButton.button == sf::Mouse::Left) {
+                sf::Vector2i mousePos = sf::Mouse::getPosition(window);
+                for (const auto& station : station_data) {
+                    int bikes_on_station =
+                      station->get_capacity() - station->get_empty_spaces();
+                    if (bikes_on_station >= 1) {
+                      float distance = std::sqrt(std::pow(mousePos.x - station->get_x(), 2) + std::pow(mousePos.y - station->get_y(), 2));
+                      if (distance <= 5) {
+                          window.close();
+                          return station.get();
+                      }
+                    }
+                }
+            }
+        }
+    }
+
+    window.clear(sf::Color::White);
+
+    window.draw(mapSprite);
+
+    for (const auto& station : station_data) {
+        int bikes_on_station =
+          station->get_capacity() - station->get_empty_spaces();
+        if (bikes_on_station >= 1) {
+          sf::CircleShape shape(5);
+          shape.setPosition(station->get_x(), station->get_y());
+          shape.setFillColor(sf::Color::Blue);
+          window.draw(shape);
+
+          sf::Text text;
+          text.setFont(font);
+          text.setString(station->get_name() + ", rowery: " + std::to_string(bikes_on_station));
+          text.setCharacterSize(12);
+          text.setFillColor(sf::Color::Blue);
+          text.setPosition(station->get_x() + 15, station->get_y());
+          window.draw(text);
+        }
+        else {
+          sf::CircleShape shape(5);
+          shape.setPosition(station->get_x(), station->get_y());
+          shape.setFillColor(sf::Color::Red);
+          window.draw(shape);
+
+          sf::Text text;
+          text.setFont(font);
+          text.setString(station->get_name());
+          text.setCharacterSize(12);
+          text.setFillColor(sf::Color::Red);
+          text.setPosition(station->get_x() + 15, station->get_y());
+          window.draw(text);
+        }
+      }
+
+      window.display();
+    }
+    return nullptr;
 }
