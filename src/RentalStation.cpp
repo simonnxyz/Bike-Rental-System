@@ -1,3 +1,9 @@
+/*
+* Name: RentalStation.cpp
+* Purpose: RentalStation methods
+* @author ksiemion
+*/
+
 #include "../include/RentalStation.h"
 #include <regex>
 #include <sstream>

@@ -1,3 +1,9 @@
+/*
+* Name: RentalStation.cpp
+* Purpose: RentalStation tests
+* @author ksiemion
+*/
+
 #include "RentalStation.h"
 #include <gtest/gtest.h>
 #include <string>

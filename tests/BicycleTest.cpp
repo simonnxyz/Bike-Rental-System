@@ -1,3 +1,9 @@
+/*
+* Name: Bicycle.cpp
+* Purpose: Bicycle tests
+* @author ksiemion
+*/
+
 #include "Bicycle.h"
 #include <gtest/gtest.h>
 

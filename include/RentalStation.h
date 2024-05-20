@@ -1,3 +1,10 @@
+/*
+* Name: RentalStation.h
+* Purpose: RentalStation header file
+* @author ksiemion
+*/
+
+
 #include <Bicycle.h>
 #include <Model.h>
 #include <vector>

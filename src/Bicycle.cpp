@@ -1,3 +1,9 @@
+/*
+* Name: Bicycle.cpp
+* Purpose: Bicycle methods
+* @author ksiemion
+*/
+
 #include "../include/Bicycle.h"
 #include <iomanip>
 #include <regex>

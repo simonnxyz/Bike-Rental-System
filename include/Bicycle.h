@@ -1,3 +1,9 @@
+/*
+* Name: Bicycle.h
+* Purpose: Bicycle header file
+* @author ksiemion
+*/
+
 #include <Model.h>
 #include <iostream>
 #pragma once
