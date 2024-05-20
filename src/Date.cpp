@@ -1,3 +1,9 @@
+/*
+* Name: Date.cpp
+* Purpose: Date methods
+* @author mmizia
+*/
+
 #include "../include/Date.h"
 #include <iomanip>
 

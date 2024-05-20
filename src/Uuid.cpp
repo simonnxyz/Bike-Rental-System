@@ -1,3 +1,9 @@
+/*
+* Name: Uuid.cpp
+* Purpose: Uuid methods
+* @author mmizia
+*/
+
 // generate_uuid_v4() function is taken from
 // https://stackoverflow.com/a/50825191/1169241
 

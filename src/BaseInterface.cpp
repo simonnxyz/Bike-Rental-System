@@ -1,3 +1,9 @@
+/*
+* Name: BaseInterface.cpp
+* Purpose: BaseInterface methods
+* @author mpedziwi
+*/
+
 #include "../include/BaseInterface.h"
 
 BaseInterface::BaseInterface() {

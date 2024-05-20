@@ -1,3 +1,9 @@
+/*
+* Name: Rent.h
+* Purpose: Rent header file
+* @author wzieziul
+*/
+
 #include <Model.h>
 
 #pragma once

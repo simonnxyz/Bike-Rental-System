@@ -1,3 +1,9 @@
+/*
+* Name: User.cpp
+* Purpose: User methods
+* @author mmizia
+*/
+
 #include "../include/User.h"
 #include "../include/SHA256.h"
 #include <iomanip>

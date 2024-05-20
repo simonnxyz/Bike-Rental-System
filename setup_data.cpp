@@ -1,3 +1,9 @@
+/*
+* Name: setup_data.cpp
+* Purpose: Users, bicycles and stations examples
+* @author mmizia
+*/
+
 #include "./include/Bicycle.h"
 #include "./include/Database.h"
 #include "./include/Date.h"

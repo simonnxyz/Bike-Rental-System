@@ -1,3 +1,9 @@
+/*
+* Name: User.h
+* Purpose: User header file
+* @author mmizia
+*/
+
 #include <Model.h>
 #include <iostream>
 

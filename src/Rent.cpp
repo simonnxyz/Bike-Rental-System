@@ -1,3 +1,9 @@
+/*
+* Name: Rent.cpp
+* Purpose: Rent methods
+* @author wzieziul
+*/
+
 #include "../include/Rent.h"
 #include <sstream>
 

@@ -1,3 +1,9 @@
+/*
+* Name: BaseInterface.h
+* Purpose: BaseInterface header file
+* @author mpedziwi
+*/
+
 #include "../include/Bicycle.h"
 #include "../include/Database.h"
 #include "../include/Date.h"

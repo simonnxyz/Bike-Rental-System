@@ -1,4 +1,9 @@
-// #include "./include/AdminInterface.h"
+/*
+* Name: main.cpp
+* Purpose: Main application file
+* @author mmizia
+*/
+
 #include "./include/AdminInterface.h"
 #include "./include/Bicycle.h"
 #include "./include/Database.h"

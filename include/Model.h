@@ -1,3 +1,9 @@
+/*
+* Name: Model.h
+* Purpose: Model header file
+* @author mmizia
+*/
+
 #include <iostream>
 #include <map>
 #include <vector>

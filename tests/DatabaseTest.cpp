@@ -1,3 +1,9 @@
+/*
+* Name: DatabaseTest.cpp
+* Purpose: Database tests
+* @author mmizia
+*/
+
 #include "../include/Database.h"
 #include "../include/User.h"
 #include <gtest/gtest.h>

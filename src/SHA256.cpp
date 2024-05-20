@@ -1,3 +1,9 @@
+/*
+* Name: SHA256.cpp
+* Purpose: SHA256 methods
+* @author mmizia
+*/
+
 #include "../include/SHA256.h"
 #include <cstring>
 #include <iomanip>

@@ -1,3 +1,9 @@
+/*
+* Name: Date.h
+* Purpose: Date header file
+* @author mmizia
+*/
+
 #include <iostream>
 #include <string>
 

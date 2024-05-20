@@ -1,3 +1,9 @@
+/*
+* Name: AdminInterface.cpp
+* Purpose: AdminInterface methods
+* @author mmizia
+*/
+
 #include "../include/AdminInterface.h"
 #include "../include/Date.h"
 #include <math.h>

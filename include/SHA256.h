@@ -1,3 +1,9 @@
+/*
+* Name: SHA256.h
+* Purpose: SHA256 header file
+* @author mmizia
+*/
+
 #ifndef SHA256_H
 #define SHA256_H
 

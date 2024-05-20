@@ -1,5 +1,5 @@
 /*
-* Name: RentalStation.cpp
+* Name: RentalStationTest.cpp
 * Purpose: RentalStation tests
 * @author ksiemion
 */

@@ -1,3 +1,9 @@
+/*
+* Name: UserTest.cpp
+* Purpose: User tests
+* @author mmizia
+*/
+
 #include "User.h"
 #include <gtest/gtest.h>
 

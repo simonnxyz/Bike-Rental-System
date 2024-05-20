@@ -1,5 +1,5 @@
 /*
-* Name: Bicycle.cpp
+* Name: BicycleTest.cpp
 * Purpose: Bicycle tests
 * @author ksiemion
 */

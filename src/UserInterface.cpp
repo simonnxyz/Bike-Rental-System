@@ -1,3 +1,9 @@
+/*
+* Name: UserInterface.cpp
+* Purpose: UserInterface methods
+* @author mpedziwi
+*/
+
 #include "../include/UserInterface.h"
 #include <math.h>
 

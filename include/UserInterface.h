@@ -1,3 +1,9 @@
+/*
+* Name: UserInterface.h
+* Purpose: UserInterface header file
+* @author mpedziwi
+*/
+
 #include "../include/BaseInterface.h"
 #include<sstream>
 #include<iomanip>

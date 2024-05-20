@@ -1,3 +1,9 @@
+/*
+* Name: Database.h
+* Purpose: Database header file
+* @author mmizia
+*/
+
 #include <Model.h>
 #include <fstream>
 #include <iterator>

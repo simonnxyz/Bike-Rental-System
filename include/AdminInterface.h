@@ -1,3 +1,9 @@
+/*
+* Name: AdminInterface.h
+* Purpose: AdminInterface header file
+* @author mmizia
+*/
+
 #include "../include/BaseInterface.h"
 #include <iomanip>
 #include <sstream>

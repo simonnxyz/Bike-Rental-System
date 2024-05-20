@@ -1,3 +1,9 @@
+/*
+* Name: DateTest.cpp
+* Purpose: Date tests
+* @author wzieziul
+*/
+
 #include "Date.h"
 #include <gtest/gtest.h>
 

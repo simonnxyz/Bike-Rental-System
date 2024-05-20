@@ -1,3 +1,9 @@
+/*
+* Name: Model.cpp
+* Purpose: Model methods
+* @author mmizia
+*/
+
 #include "../include/Model.h"
 #include "Uuid.cpp"
 

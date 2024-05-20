@@ -1,3 +1,9 @@
+/*
+* Name: RentTest.cpp
+* Purpose: Rent tests
+* @author wzieziul
+*/
+
 #include "Rent.h"
 #include <gtest/gtest.h>
 
